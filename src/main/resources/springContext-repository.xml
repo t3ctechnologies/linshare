@@ -291,5 +291,7 @@
 	<bean name="upgradeTaskRepository" class="org.linagora.linshare.core.repository.hibernate.UpgradeTaskRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
+	
+
 
 </beans>

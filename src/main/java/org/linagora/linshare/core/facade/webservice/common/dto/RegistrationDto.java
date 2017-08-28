@@ -4,18 +4,31 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.linagora.linshare.core.domain.entities.Registration;
+
 import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 
 @XmlRootElement(name = "Registration")
 //@ApiModel(value = "Registration", description = "A thread is a shared space for users to deposit files.")
 public class RegistrationDto {
 	
+	@ApiModelProperty(value = "id")
 	private String id;
+	
+	@ApiModelProperty(value = "name")
 	private String name;
+	
+	@ApiModelProperty(value = "emailId")
 	private String emailId;
+	
+	@ApiModelProperty(value = "companyName")
 	private String companyName;
+	
+	@ApiModelProperty(value = "phoneNumber")
 	private String phoneNumber;
+	
 	private Date createdDate;
 	private Date modifiedDate;
 	private boolean isDemoCreated;
@@ -23,7 +36,12 @@ public class RegistrationDto {
 	private String role;
 	
 	public RegistrationDto() {
-//		this.name = "constructor name";
+		
+	}
+	
+	public void setDetails(String name, String id) {
+		this.name = name;
+		this.id = id;
 	}
 	
 	public String getId() {

@@ -12,4 +12,8 @@ public abstract class GenericRegistrationAccountRepositoryImpl<U extends Registr
 		// TODO Auto-generated constructor stub
 	}
 
+	public Registration findById(String id) {
+		return super.getHibernateTemplate().get(Registration.class, id);
+//		return super.findById(entity, id);
+	}
 }

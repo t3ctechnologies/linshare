@@ -80,13 +80,15 @@ public abstract class AbstractRepositoryImpl<T> implements AbstractRepository<T>
      * @throws java.lang.IllegalArgumentException if entity is null.
      */
     public T create(T entity) throws BusinessException {
+    	System.out.println("Create AbstractionRepositoryImpl");
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null");
         }
+        System.out.println("Create AbstractionRepositoryImpl debug1 entity"+entity);
         logger.debug("entity created:"+entity);
         // perform unicity check:
         checkUnicity(entity);
-
+        System.out.println("Create AbstractionRepositoryImpl Save");
         hibernateTemplate.save(entity);
         return entity;
     }
@@ -154,9 +156,13 @@ public abstract class AbstractRepositoryImpl<T> implements AbstractRepository<T>
      * @throws org.linagora.linshare.core.BusinessException
      */
     private void checkUnicity(T entity) throws BusinessException {
-        if (findByCriteria(getNaturalKeyCriteria(entity)).size() > 0) {
+    	int size = findByCriteria(getNaturalKeyCriteria(entity)).size();
+    	System.out.println("Create AbstractionRepositoryImpl CheckUnicity "+size);
+        if (size > 0) {
             throw new BusinessException(BusinessErrorCode.UNKNOWN,
                     "This entity already exists in database:"+getNaturalKeyCriteria(entity));
+        } else {
+        	System.out.println("Create AbstractionRepositoryImpl CheckUnicity failed");
         }
     }
 
@@ -199,6 +205,7 @@ public abstract class AbstractRepositoryImpl<T> implements AbstractRepository<T>
      * @return search result.
      */
 	protected List<T> findByCriteria(final DetachedCriteria criteria) {
+		System.out.println("Create AbstractionRepositoryImpl FindByCreteria");
         return (List<T>) hibernateTemplate.findByCriteria(criteria);
     }
     
@@ -229,6 +236,10 @@ public abstract class AbstractRepositoryImpl<T> implements AbstractRepository<T>
      */
     protected Session getCurrentSession() {
     	return hibernateTemplate.getSessionFactory().getCurrentSession();
+    }
+    
+    protected T findById(T entity, String id) {
+    	return (T)hibernateTemplate.get(entity.getClass(), id);
     }
 
 }

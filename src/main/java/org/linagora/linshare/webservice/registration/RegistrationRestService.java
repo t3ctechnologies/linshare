@@ -6,5 +6,7 @@ import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
 public interface RegistrationRestService {
 
 	
-	RegistrationDto create(RegistrationDto registration) throws BusinessException;
+	RegistrationDto create(RegistrationDto registrationDto) throws BusinessException;
+	RegistrationDto find(String id) throws BusinessException;
+	RegistrationDto update(RegistrationDto registrationDto) throws BusinessException;
 }

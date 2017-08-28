@@ -84,9 +84,14 @@
 	<bean id="userv2WelcomeMessagesRestService" class="org.linagora.linshare.webservice.userv2.impl.WelcomeMessagesRestServiceImpl">
 		<constructor-arg ref="wsWelcomeMessagesFacadeImpl" />
 	</bean>
+	
+	<bean id="registrationRestService" class="org.linagora.linshare.webservice.registration.impl.RegistrationRestServiceImpl">
+		<constructor-arg ref="registrationRepository" />
+	</bean>
 
 	<jaxrs:server id="userRestContainer" address="/rest/user/v2">
 		<jaxrs:serviceBeans>
+		<ref bean="registrationRestService" />
 			<ref bean="userEnumRestService" />
 			<ref bean="userAuthenticationRestService" />
 			<ref bean="userv2DocumentRestService" />

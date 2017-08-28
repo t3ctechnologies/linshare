@@ -12,20 +12,20 @@
 	http://cxf.apache.org/schemas/jaxws.xsd
 	http://cxf.apache.org/jaxrs
 	http://cxf.apache.org/schemas/jaxrs.xsd">
-	<description>User v2 api exposed on /webservice/rest/user/v2 endpoint.</description>
+	<description>registration endpoint.</description>
 
 	<!-- cxf -->
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<bean id="registrationRestService" class="org.linagora.linshare.webservice.registration.impl.RegistrationRestServiceImpl">
+	<!-- <bean id="registrationRestService" class="org.linagora.linshare.webservice.registration.impl.RegistrationRestServiceImpl">
 		
-	</bean>
+	</bean> -->
 	
 	
-	<jaxrs:server id="registrationRestContainer" address="/rest/registration">
+	<jaxrs:server id="registrationRestContainer" address="/rest/user/registration">
 		<jaxrs:serviceBeans>
-			<ref bean="registrationRestService" />
+			<!-- <ref bean="registrationRestService" /> -->
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />

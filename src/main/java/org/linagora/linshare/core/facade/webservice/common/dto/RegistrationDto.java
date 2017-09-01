@@ -36,7 +36,17 @@ public class RegistrationDto {
 	private String role;
 	
 	public RegistrationDto() {
-		
+		super();
+	}
+	
+	public RegistrationDto(Registration reg) {
+		this.id = reg.getId();
+		this.name = reg.getName();
+		this.emailId = reg.getEmailId();
+		this.companyName = reg.getCompanyName();
+		this.phoneNumber = reg.getPhoneNumber();
+		this.createdDate = reg.getCreatedDate();
+		this.modifiedDate = reg.getModifiedDate();
 	}
 	
 	public void setDetails(String name, String id) {
@@ -105,10 +115,4 @@ public class RegistrationDto {
 		this.role = role;
 	}
 	
-	
-	
-	
-	
-	
-
 }

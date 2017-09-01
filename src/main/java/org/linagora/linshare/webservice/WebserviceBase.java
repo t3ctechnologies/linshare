@@ -67,7 +67,7 @@ public class WebserviceBase {
 	public static final String NAME_SPACE_NS = "http://org/linagora/linshare/webservice/";
 
 	/**
-	 * 1mo
+	 * 
 	 */
 	public static final int ERROR_THRESHOLD_FOR_FILE_SIZE_DIFFERENCE = 1048576;
 

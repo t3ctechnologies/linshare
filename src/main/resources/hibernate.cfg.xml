@@ -82,5 +82,7 @@
 		<mapping resource="org/linagora/linshare/core/domain/entities/UpgradeTask.hbm.xml"/>
 		
 		<mapping resource="org/linagora/linshare/core/domain/entities/Registration.hbm.xml"/>
+		<mapping resource="org/linagora/linshare/core/domain/entities/Modules.hbm.xml"/>
+		
 	</session-factory>
 </hibernate-configuration>

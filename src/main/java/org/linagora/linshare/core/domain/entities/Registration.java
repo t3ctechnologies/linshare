@@ -2,6 +2,8 @@ package org.linagora.linshare.core.domain.entities;
 
 import java.util.Date;
 
+import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
+
 public class Registration {
 	
 	private String id;
@@ -18,6 +20,10 @@ public class Registration {
 	
 	public Registration() {
 		super();
+	}
+	
+	public Registration(RegistrationDto rdto) {
+		this.name = rdto.getName();
 	}
 	
 	
@@ -82,7 +88,4 @@ public class Registration {
 		this.role = role;
 	}
 	
-	
-	
-
 }

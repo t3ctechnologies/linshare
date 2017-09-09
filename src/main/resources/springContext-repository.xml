@@ -14,6 +14,8 @@
 	<bean name="registrationRepository" class="org.linagora.linshare.core.repository.hibernate.RegistrationRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
+	
+	
 
 	<bean name="threadMemberRepository" class="org.linagora.linshare.core.repository.hibernate.ThreadMemberRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
@@ -293,6 +295,10 @@
 	</bean>
 	
 	<bean name="modulesRepository" class="org.linagora.linshare.core.repository.hibernate.ModulesRepositoryImpl">
+		<constructor-arg ref="hibernateTemplate" />
+	</bean>
+	
+	<bean name="organizationRepository" class="org.linagora.linshare.core.repository.hibernate.OrganizationRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
 

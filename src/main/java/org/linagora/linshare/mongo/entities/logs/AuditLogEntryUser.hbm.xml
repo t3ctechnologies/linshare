@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 8, 2017 2:29:02 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <joined-subclass name="org.linagora.linshare.mongo.entities.logs.AuditLogEntryUser" extends="org.linagora.linshare.mongo.entities.logs.AuditLogEntry" table="AUDITLOGENTRYUSER"
+    lazy="false" abstract="true">
+        <key>
+            <column name="ID" />
+        </key>
+        <many-to-one name="actor" class="org.linagora.linshare.mongo.entities.mto.AccountMto" fetch="join">
+            <column name="ACTOR" />
+        </many-to-one>
+        <list name="relatedAccounts" inverse="false" table="AUDITLOGENTRYUSER" lazy="true">
+            <key>
+                <column name="ACTOR" />
+            </key>
+            <list-index></list-index>
+            <element type="java.lang.String">
+                <column name="RELATEDACCOUNTS" />
+            </element>
+        </list>
+        <list name="relatedResources" inverse="false" table="AUDITLOGENTRYUSER" lazy="true" access="field">
+            <key>
+                <column name="ACTOR" />
+            </key>
+            <list-index></list-index>
+            <element type="java.lang.String">
+                <column name="RELATEDRESOURCES" />
+            </element>
+        </list>
+    </joined-subclass>
+</hibernate-mapping>

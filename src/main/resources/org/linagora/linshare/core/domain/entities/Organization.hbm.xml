@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="org.linagora.linshare.core.domain.entities.Organization" table="organization">  
+    <id name="id" column="id">  
+     <generator class="guid"></generator>  
+    </id>  
+    
+       
+    <property name="name" column="name"></property>  
+    <property name="companyname" column="companyname"></property>
+    <property name="location" column="location"></property>
+    <property name="longitude" column="longitude"></property>
+    <property name="latitude" column="latitude"></property>
+    <property name="createddate" column="createddate"></property>          
+    <property name="modifieddate" column="modifieddate"></property>
+    <property name="isdemocreated" column="isdemocreated"></property>
+    <property name="isactive" column="isactive"></property>
+    <property name="role" column="role"></property>        
+    
+  </class>  
+</hibernate-mapping>

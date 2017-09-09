@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 8, 2017 2:29:02 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="org.linagora.linshare.mongo.entities.logs.AuditLogEntry" table="AUDITLOGENTRY">
+        <id name="id" type="java.lang.String">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="uuid" type="java.lang.String">
+            <column name="UUID" />
+        </property>
+        <many-to-one name="authUser" class="org.linagora.linshare.mongo.entities.mto.AccountMto" access="field" fetch="join">
+            <column name="AUTHUSER" />
+        </many-to-one>
+        <property name="resourceUuid" type="java.lang.String">
+            <column name="RESOURCEUUID" />
+        </property>
+        <property name="action">
+            <column name="ACTION" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">org.linagora.linshare.core.domain.constants.LogAction</param>
+            </type>
+        </property>
+        <property name="cause">
+            <column name="CAUSE" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">org.linagora.linshare.core.domain.constants.LogActionCause</param>
+            </type>
+        </property>
+        <property name="fromResourceUuid" type="java.lang.String">
+            <column name="FROMRESOURCEUUID" />
+        </property>
+        <property name="type">
+            <column name="TYPE" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">org.linagora.linshare.core.domain.constants.AuditLogEntryType</param>
+            </type>
+        </property>
+        <property name="creationDate" type="java.util.Date">
+            <column name="CREATIONDATE" />
+        </property>
+        <property name="technicalComment" type="java.lang.String">
+            <column name="TECHNICALCOMMENT" />
+        </property>
+    </class>
+</hibernate-mapping>

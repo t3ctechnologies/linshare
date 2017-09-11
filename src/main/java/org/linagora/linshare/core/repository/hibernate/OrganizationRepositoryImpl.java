@@ -55,10 +55,11 @@ public class OrganizationRepositoryImpl extends GenericOrganizationAccountReposi
 		
                           		Organization reg = new Organization() ;
 		Date date =new Date();
-		
+		reg.setLongitude(entity.getLongitude());
+		reg.setCompanyName(entity.getCompanyName());
 		reg.setCreatedDate(date);
 		reg.setLocation(entity.getLocation());
-		reg.setActive(false);
+		reg.setisActive(false);
 		reg.setIsdemoCreated(true);
 		reg.setModifiedDate(date);
 		reg.setName(entity.getName());
@@ -80,6 +81,10 @@ public class OrganizationRepositoryImpl extends GenericOrganizationAccountReposi
 		Organization regDb = super.findById(entity.getId());
 		if(entity.getName() != null) {
 			regDb.setName(entity.getName());
+		}
+		
+		if(entity.getCompanyName() != null) {
+			regDb.setCompanyName(entity.getCompanyName());
 		}
 		
 		if(entity.getCreatedDate() != null) {

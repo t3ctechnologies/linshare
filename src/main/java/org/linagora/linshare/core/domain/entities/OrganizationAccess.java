@@ -3,60 +3,60 @@ package org.linagora.linshare.core.domain.entities;
 import java.util.Date;
 
 public class OrganizationAccess {
-	
-	private String id;
-	private String moduleid;
-	private String organizationid;
-	private String subscriptionid;
-	private Date createddate;
-	private Date modifieddate;
-	private boolean isdemocreated;
-	private boolean isActive;
-	private String statusid;
+
 	private String role;
+	private String Id;
+	private String moduleId;
+	private String organizationId;
+	private String subscriptionId;
+	private boolean isdemoCreated;
+	private String statusId;
+	private Date createdDate;
+	private Date modifiedDate;
+	private boolean isActive;
+	
 	
 	public String getId() {
-		return id;
+		return Id;
 	}
 	public void setId(String id) {
-		this.id = id;
+		Id = id;
 	}
-	public String getModuleid() {
-		return moduleid;
+	public String getModuleId() {
+		return moduleId;
 	}
-	public void setModuleid(String moduleid) {
-		this.moduleid = moduleid;
+	public void setModuleId(String moduleId) {
+		this.moduleId = moduleId;
 	}
-	
-	public String getOrganizationid() {
-		return organizationid;
+	public String getOrganizationId() {
+		return organizationId;
 	}
-	public void setOrganizationid(String organizationid) {
-		this.organizationid = organizationid;
+	public void setOrganizationId(String organizationId) {
+		this.organizationId = organizationId;
 	}
-	public String getSubscriptionid() {
-		return subscriptionid;
+	public String getSubscriptionId() {
+		return subscriptionId;
 	}
-	public void setSubscriptionid(String subscriptionid) {
-		this.subscriptionid = subscriptionid;
+	public void setSubscriptionId(String subscriptionId) {
+		this.subscriptionId = subscriptionId;
 	}
-	public Date getCreateddate() {
-		return createddate;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
-	public Date getModifieddate() {
-		return modifieddate;
+	public Date getModifiedDate() {
+		return modifiedDate;
 	}
-	public void setModifieddate(Date modifieddate) {
-		this.modifieddate = modifieddate;
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
-	public boolean isIsdemocreated() {
-		return isdemocreated;
+	public boolean isIsdemoCreated() {
+		return isdemoCreated;
 	}
-	public void setIsdemocreated(boolean isdemocreated) {
-		this.isdemocreated = isdemocreated;
+	public void setIsdemoCreated(boolean isdemoCreated) {
+		this.isdemoCreated = isdemoCreated;
 	}
 	public boolean isActive() {
 		return isActive;
@@ -64,11 +64,11 @@ public class OrganizationAccess {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public String getStatusid() {
-		return statusid;
+	public String getStatusId() {
+		return statusId;
 	}
-	public void setStatusid(String statusid) {
-		this.statusid = statusid;
+	public void setStatusId(String statusId) {
+		this.statusId = statusId;
 	}
 	public String getRole() {
 		return role;
@@ -76,5 +76,7 @@ public class OrganizationAccess {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
 
 }

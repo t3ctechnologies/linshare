@@ -302,4 +302,8 @@
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
 
+   	<bean name="organizationaccessRepository" class="org.linagora.linshare.core.repository.hibernate.OrganizationAccessRepositoryImpl">
+		<constructor-arg ref="hibernateTemplate" />
+	</bean>
+	
 </beans>

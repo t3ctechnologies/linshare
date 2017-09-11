@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="org.linagora.linshare.core.domain.entities.OrganizationAccess " table="organizationaccess">  
+    <id name="id" column="id">  
+     <generator class="guid"></generator>  
+    </id>  
+  
+    <property name="moduleId" column="moduleId"></property>
+    <property name="organizationId" column="organizationId"></property>
+    <property name="subscriptionId" column="subscriptionId"></property>
+    <property name="createdDate" column="createdDate"></property>
+    <property name="modifiedDate" column="modifiedDate"></property>          
+    <property name="isdemoCreated" column="isdemoCreated"></property>
+    <property name="isActive" column="isActive"></property>
+    <property name="statusId" column="statusId"></property>
+    <property name="role" column="role"></property>
+    
+  </class>  
+</hibernate-mapping>

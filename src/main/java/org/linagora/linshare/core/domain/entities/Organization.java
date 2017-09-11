@@ -101,11 +101,13 @@ public class Organization {
 		this.isdemoCreated = isdemoCreated;
 	}
 
-	public boolean isActive() {
+	
+
+	public boolean getisActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setisActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 

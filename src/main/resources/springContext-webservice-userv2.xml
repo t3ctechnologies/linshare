@@ -96,12 +96,17 @@
 	<bean id="organizationRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationRestServiceImpl">
 		<constructor-arg ref="organizationRepository" />
 	</bean>
+	
+	<bean id="organizationaccessRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationAccessRestServiceImpl">
+		<constructor-arg ref="organizationaccessRepository" />
+	</bean>
 
 	<jaxrs:server id="userRestContainer" address="/rest/user/v2">
 		<jaxrs:serviceBeans>
 		<ref bean="registrationRestService" />
 		<ref bean="modulesRestService" />
 		<ref bean="organizationRestService" />
+		<ref bean="organizationaccessRestService" />
 			<ref bean="userEnumRestService" />
 			<ref bean="userAuthenticationRestService" />
 			<ref bean="userv2DocumentRestService" />

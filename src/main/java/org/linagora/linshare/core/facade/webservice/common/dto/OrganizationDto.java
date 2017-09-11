@@ -32,11 +32,14 @@ public class OrganizationDto {
 		@ApiModelProperty(value = "latitude")
 		private String latitude;
 		
+		@ApiModelProperty(value = "role")
+		private String role;
+		
 		private Date createdDate;
 		private Date modifiedDate;
 		private boolean isDemoCreated;
 		private boolean isActive;
-		private String role;
+//		private String role;
 		
 		public OrganizationDto() {
 			super();
@@ -44,6 +47,7 @@ public class OrganizationDto {
 		
 		public OrganizationDto(Organization reg) {
 			this.id = reg.getId();
+			this.companyName = reg.getCompanyName();
 			this.name = reg.getName();
 			this.location = reg.getLocation();
 			this.longitude = reg.getLongitude();
@@ -58,8 +62,31 @@ public class OrganizationDto {
 			this.name = name;
 			this.id = id;
 		}
-		
-		
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getCompanyName() {
+			return companyName;
+		}
+
+		public void setCompanyName(String companyName) {
+			this.companyName = companyName;
+		}
+
 		public String getLocation() {
 			return location;
 		}
@@ -84,6 +111,22 @@ public class OrganizationDto {
 			this.latitude = latitude;
 		}
 
+		public Date getCreatedDate() {
+			return createdDate;
+		}
+
+		public void setCreatedDate(Date createdDate) {
+			this.createdDate = createdDate;
+		}
+
+		public Date getModifiedDate() {
+			return modifiedDate;
+		}
+
+		public void setModifiedDate(Date modifiedDate) {
+			this.modifiedDate = modifiedDate;
+		}
+
 		public boolean isDemoCreated() {
 			return isDemoCreated;
 		}
@@ -99,48 +142,17 @@ public class OrganizationDto {
 		public void setActive(boolean isActive) {
 			this.isActive = isActive;
 		}
-		
-		public String getId() {
-			return id;
-		}
-		public void setId(String id) {
-			this.id = id;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-		public String getCompanyName() {
-			return companyName;
-		}
-		public void setCompanyName(String companyName) {
-			this.companyName = companyName;
-		}
-	
-		public Date getCreatedDate() {
-			return createdDate;
-		}
-		public void setCreatedDate(Date createdDate) {
-			this.createdDate = createdDate;
-		}
-		public Date getModifiedDate() {
-			return modifiedDate;
-		}
-		public void setModifiedDate(Date modifiedDate) {
-			this.modifiedDate = modifiedDate;
-		}
-		
+
 		public String getRole() {
 			return role;
 		}
+
 		public void setRole(String role) {
 			this.role = role;
 		}
-
-			
+		
+		
+	
 		
 }
 

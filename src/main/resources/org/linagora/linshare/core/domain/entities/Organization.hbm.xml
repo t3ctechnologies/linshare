@@ -8,15 +8,16 @@
     
        
     <property name="name" column="name"></property>  
-    <property name="companyname" column="companyname"></property>
+    <property name="companyName" column="companyName"></property>
     <property name="location" column="location"></property>
     <property name="longitude" column="longitude"></property>
     <property name="latitude" column="latitude"></property>
-    <property name="createddate" column="createddate"></property>          
-    <property name="modifieddate" column="modifieddate"></property>
-    <property name="isdemocreated" column="isdemocreated"></property>
-    <property name="isactive" column="isactive"></property>
+    <property name="createdDate" column="createdDate"></property>          
+    <property name="modifiedDate" column="modifiedDate"></property>
+    <property name="isdemoCreated" column="isdemoCreated"></property>
+    <property name="isActive" column="isActive"></property>
     <property name="role" column="role"></property>        
+    
     
   </class>  
 </hibernate-mapping>

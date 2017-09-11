@@ -16,5 +16,4 @@ public abstract class GenericOrganizationAccountRepositoryImpl <U extends Organi
 //		return super.findById(entity, id);
 	}
       
-
 }

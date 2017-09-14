@@ -25,8 +25,8 @@ import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
-@Path("/modulestest")
-@Api(value = "/rest/user/v2/modulestest", 
+@Path("/modules")
+@Api(value = "/rest/user/v2/modules", 
 description = "threads service.")
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })

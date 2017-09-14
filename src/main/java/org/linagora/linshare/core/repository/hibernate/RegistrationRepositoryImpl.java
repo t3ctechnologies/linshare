@@ -1,18 +1,27 @@
 package org.linagora.linshare.core.repository.hibernate;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.lang.Validate;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.linagora.linshare.core.domain.entities.Account;
+import org.linagora.linshare.core.domain.entities.DocumentEntry;
 import org.linagora.linshare.core.domain.entities.Registration;
 import org.linagora.linshare.core.domain.entities.Thread;
+import org.linagora.linshare.core.domain.entities.User;
 import org.linagora.linshare.core.exception.BusinessException;
 import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
+import org.linagora.linshare.core.facade.webservice.user.dto.DocumentDto;
 import org.linagora.linshare.core.repository.RegistrationRepository;
+import org.linagora.linshare.mongo.entities.logs.AuditLogEntryUser;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 
 public class RegistrationRepositoryImpl extends GenericRegistrationAccountRepositoryImpl<Registration>
@@ -63,7 +72,7 @@ implements RegistrationRepository{
 		reg.setModifiedDate(date);
 		reg.setName(entity.getName());
 		reg.setPhoneNumber(entity.getPhoneNumber());
-		reg.setRole("hjhjh");
+	
 		
 		Registration reg1 = super.create(reg);
 		return new RegistrationDto(reg1);
@@ -98,6 +107,11 @@ implements RegistrationRepository{
 		RegistrationDto rdto = new RegistrationDto(reg1);
 //		rdto.setDetails(reg1.getName(), reg1.getId());
 		return rdto;
+	}
+	
+	@Override
+	public List<Registration> findAll() throws BusinessException{
+		return super.findAll();
 	}
 
 }

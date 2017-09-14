@@ -33,7 +33,7 @@ public class RegistrationDto {
 	private Date modifiedDate;
 	private boolean isDemoCreated;
 	private boolean isActive;
-	private String role;
+	
 	
 	public RegistrationDto() {
 		super();
@@ -108,11 +108,6 @@ public class RegistrationDto {
 	public void setisActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
+
 	
 }

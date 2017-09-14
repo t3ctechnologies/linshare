@@ -15,7 +15,7 @@ public class Registration {
 	private Date modifiedDate;
 	private boolean isDemoCreated;
 	private boolean isActive;
-	private String role;
+	
 	
 	
 	public Registration() {
@@ -80,12 +80,6 @@ public class Registration {
 	}
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
 	}
 	
 }

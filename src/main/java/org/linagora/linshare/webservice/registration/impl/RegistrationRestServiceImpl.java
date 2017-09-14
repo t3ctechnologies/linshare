@@ -1,6 +1,7 @@
 package org.linagora.linshare.webservice.registration.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +21,13 @@ import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.WorkGroupMemberDto;
 import org.linagora.linshare.core.facade.webservice.registration.RegistrationFacade;
 import org.linagora.linshare.core.facade.webservice.user.WorkGroupFacade;
+import org.linagora.linshare.core.facade.webservice.user.dto.DocumentDto;
 import org.linagora.linshare.core.repository.AbstractRepository;
 import org.linagora.linshare.core.repository.ThreadRepository;
 import org.linagora.linshare.core.repository.hibernate.AbstractRegistrationImpl;
 import org.linagora.linshare.core.repository.hibernate.RegistrationRepositoryImpl;
 import org.linagora.linshare.webservice.WebserviceBase;
+import org.linagora.linshare.webservice.annotations.NoCache;
 import org.linagora.linshare.webservice.registration.RegistrationRestService;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -119,5 +122,31 @@ public class RegistrationRestServiceImpl extends WebserviceBase implements Regis
 		
 		return rri.update(reg);                                                                                                                                                                                                 
 	} 
+	
+	@NoCache
+	@Path("/findAll")
+	@GET
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@ApiOperation(value = "Get all documents.", response = RegistrationDto.class, responseContainer = "Set")
+	@ApiResponses({
+			@ApiResponse(code = 403, message = "Current logged in account does not have the delegation role."),
+			@ApiResponse(code = 404, message = "Document not found."),
+			@ApiResponse(code = 400, message = "Bad request : missing required fields."),
+			@ApiResponse(code = 500, message = "Internal server error."), })
+	
+
+
+	@Override
+	public List<RegistrationDto> findAll() throws BusinessException {
+		// TODO Auto-generated method stub
+		List<Registration> list = rri.findAll();
+		List<RegistrationDto> listDto = new ArrayList<RegistrationDto>();
+		for(Registration reg : list) {
+				//convert reg to registrationDto
+				RegistrationDto regDto = new RegistrationDto(reg);
+				listDto.add(regDto);
+			}
+		return listDto;
+	}
 	
 }

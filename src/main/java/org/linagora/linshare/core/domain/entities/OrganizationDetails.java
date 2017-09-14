@@ -4,23 +4,57 @@ import java.util.Date;
 
 public class OrganizationDetails {
 	
-	private String id;
-	private String addressid;
-	private String organizationid;
-	private String numberofemployee;
-	private Date createddate;
-	private Date modifieddate;
-	private boolean isdemocreated;
+	private String organizationId;
+	private String addressId;
+	private boolean isdemoCreated;
+	private String numberofEmployee;
+	private Date createdDate;
+	private Date modifiedDate;
 	private boolean isActive;
-	private String statusid;        
 	private String role;
-	private Organization organization;
-	
-	public Organization getOrganization() {
-		return organization;
+	private String id;
+	public String getOrganizationId() {
+		return organizationId;
 	}
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
+	public void setOrganizationId(String organizationId) {
+		this.organizationId = organizationId;
+	}
+	public String getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+	public boolean isIsdemoCreated() {
+		return isdemoCreated;
+	}
+	public void setIsdemoCreated(boolean isdemoCreated) {
+		this.isdemoCreated = isdemoCreated;
+	}
+	public String getNumberofEmployee() {
+		return numberofEmployee;
+	}
+	public void setNumberofEmployee(String numberofEmployee) {
+		this.numberofEmployee = numberofEmployee;
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public boolean getisActive() {
+		return isActive;
+	}
+	public void setisActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	public String getRole() {
 		return role;
@@ -34,53 +68,4 @@ public class OrganizationDetails {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAddressid() {
-		return addressid;
-	}
-	public void setAddressid(String addressid) {
-		this.addressid = addressid;
-	}
-	public String getOrganizationid() {
-		return organizationid;
-	}
-	public void setOrganizationid(String organizationid) {
-		this.organizationid = organizationid;
-	}
-	public String getNumberofemployee() {
-		return numberofemployee;
-	}
-	public void setNumberofemployee(String numberofemployee) {
-		this.numberofemployee = numberofemployee;
-	}
-	public Date getCreateddate() {
-		return createddate;
-	}
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
-	}
-	public Date getModifieddate() {
-		return modifieddate;
-	}
-	public void setModifieddate(Date modifieddate) {
-		this.modifieddate = modifieddate;
-	}
-	public boolean isIsdemocreated() {
-		return isdemocreated;
-	}
-	public void setIsdemocreated(boolean isdemocreated) {
-		this.isdemocreated = isdemocreated;
-	}
-	public boolean isActive() {
-		return isActive;
-	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-	public String getStatusid() {
-		return statusid;
-	}
-	public void setStatusid(String statusid) {
-		this.statusid = statusid;
-	}
-
 }

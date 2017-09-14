@@ -22,7 +22,7 @@ public class OrganizationAccessRepositoryImpl extends GenericOrganizationAccessA
 	protected DetachedCriteria getNaturalKeyCriteria(OrganizationAccess entity) {
 		// TODO Auto-generated method stub
 		DetachedCriteria det = DetachedCriteria.forClass(OrganizationAccess.class).add(
-				Restrictions.eq("name", entity.getOrganizationId()));
+				Restrictions.eq("organizationId", entity.getOrganizationId()));
 		return det;
 		
 	}
@@ -36,6 +36,7 @@ public class OrganizationAccessRepositoryImpl extends GenericOrganizationAccessA
 		Validate.notEmpty(entity.getStatusId(), "Missing required field StatusId");
 		Validate.notEmpty(entity.getSubscriptionId(), "Missing required field SubscriptionId");
 		Validate.notEmpty(entity.getRole(), "Missing required field Role");
+		Validate.notEmpty(entity.getUserId(), "Missing required field userId");
 		
 		
 		return super.create(entity);
@@ -50,18 +51,18 @@ public class OrganizationAccessRepositoryImpl extends GenericOrganizationAccessA
 		Validate.notEmpty(entity.getStatusId(), "Missing required field StatusId");
 		Validate.notEmpty(entity.getSubscriptionId(), "Missing required field SubscriptionId");
 		Validate.notEmpty(entity.getRole(), "Missing required field Role");
+		Validate.notEmpty(entity.getUserId(), "Missing required field userId");
 		
 		
-		
-                          		OrganizationAccess reg = new OrganizationAccess() ;
+        OrganizationAccess reg = new OrganizationAccess() ;
 		Date date =new Date();
-		reg.setModifiedDate(entity.getModifiedDate());
+		reg.setModifiedDate(date);
 		reg.setModuleId(entity.getModuleId());
+		reg.setUserId(entity.getUserId());
 		reg.setCreatedDate(date);
 		reg.setOrganizationId(entity.getOrganizationId());
-		reg.setActive(false);
+		reg.setisActive(false);
 		reg.setIsdemoCreated(true);
-		reg.setModifiedDate(date);
 		reg.setStatusId(entity.getStatusId());
 		reg.setSubscriptionId(entity.getSubscriptionId());
 		reg.setRole("hjhjh");
@@ -78,12 +79,18 @@ public class OrganizationAccessRepositoryImpl extends GenericOrganizationAccessA
 		Validate.notEmpty(entity.getId(), "Missing required field Id");
 
 		OrganizationAccess regDb = super.findById(entity.getId());
+		
 		if(entity.getModuleId() != null) {
 			regDb.setModuleId(entity.getModuleId());
 		}
 		
 		if(entity.getOrganizationId() != null) {
 			regDb.setOrganizationId(entity.getOrganizationId());
+		}
+		
+		
+		if(entity.getUserId()!= null) {
+			regDb.setUserId(entity.getUserId());
 		}
 		
 		if(entity.getCreatedDate() != null) {

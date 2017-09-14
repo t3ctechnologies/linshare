@@ -49,7 +49,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 				) throws BusinessException {
 			// TODO Auto-generated method stub
 //			return registrationFacade.create(registration);
-			//System.out.println("Create Organization api" +organizationaccessDto.getOrganizationId());
+			System.out.println("Create Organization api" +organizationaccessDto.getOrganizationId());
 			return rri.createLogic(organizationaccessDto);
 		}
 		
@@ -80,15 +80,12 @@ import com.wordnik.swagger.annotations.ApiResponses;
 				@ApiResponse(code = 400, message = "Bad request : missing required fields."),  
 				@ApiResponse(code = 500, message = "Internal server error."), })
 		@Override
-		public OrganizationAccessDto update(@ApiParam(value = "Organization to update.", required = true) OrganizationAccessDto reg)
+		public OrganizationAccessDto update(
+				@ApiParam(value = "Organization to update.", required = true) OrganizationAccessDto reg)
 				throws BusinessException {
 			
 			
 			return rri.update(reg);                                                                                                                                                                                                 
 		}
-
-
-	
-
 	
 }

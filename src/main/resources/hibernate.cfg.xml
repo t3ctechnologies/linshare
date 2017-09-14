@@ -85,6 +85,8 @@
 		<mapping resource="org/linagora/linshare/core/domain/entities/Registration.hbm.xml"/>
 		<mapping resource="org/linagora/linshare/core/domain/entities/Modules.hbm.xml"/>
 		<mapping resource="org/linagora/linshare/core/domain/entities/Organization.hbm.xml"/>
+		<mapping resource="org/linagora/linshare/core/domain/entities/OrganizationAccess.hbm.xml"/>
+		<mapping resource="org/linagora/linshare/core/domain/entities/OrganizationDetails.hbm.xml"/>
 		
 		
 		

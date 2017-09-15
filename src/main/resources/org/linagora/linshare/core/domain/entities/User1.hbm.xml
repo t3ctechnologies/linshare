@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="org.linagora.linshare.core.domain.entities.User1" table="User">  
+    <id name="id" column="id">  
+     <generator class="guid"></generator>  
+    </id>  
+            
+    <property name="salutation" column="salutation"></property>
+    <property name="firstName" column="firstName"></property>  
+    <property name="lastName" column="lastName"></property> 
+    <property name="middleName" column="middleName"></property>
+    <property name="emailId" column="emailId"></property>
+    <property name="password" column="password"></property>
+    <property name="phoneNumber" column="phoneNumber"></property>
+    <property name="createdDate" column="createdDate"></property>
+    <property name="modifiedDate" column="modifiedDate"></property>
+    <property name="isActive" column="isActive"></property>
+    <property name="isDisable" column="isDisable"></property>
+    <property name="organizationId" column="organizationId"></property>
+  
+  </class>  
+</hibernate-mapping>

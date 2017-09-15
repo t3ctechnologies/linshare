@@ -16,7 +16,8 @@
     <property name="modifiedDate" column="modifiedDate"></property>
     <property name="isdemoCreated" column="isdemoCreated"></property>
     <property name="isActive" column="isActive"></property>
-    <property name="role" column="role"></property>        
+    <property name="registrationId" column="registrationId"></property>
+    <!-- <property name="role" column="role"></property>         -->
     
     
   </class>  

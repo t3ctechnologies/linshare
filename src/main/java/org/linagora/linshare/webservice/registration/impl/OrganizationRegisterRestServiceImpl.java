@@ -46,7 +46,7 @@ public class OrganizationRegisterRestServiceImpl  extends WebserviceBase impleme
 
 	@Path("/register")
 	@POST
-	@ApiOperation(value = "Create a registration.", response = RegistrationDto.class)
+	@ApiOperation(value = "Create a registration.", response = OrganizationRegisterDto.class)
 	@ApiResponses({ @ApiResponse(code = 403, message = "Current logged in account does not have the delegation role."),
 			@ApiResponse(code = 404, message = "Thread not found."),
 			@ApiResponse(code = 400, message = "Bad request : missing required fields."),
@@ -59,11 +59,29 @@ public class OrganizationRegisterRestServiceImpl  extends WebserviceBase impleme
 		// TODO Auto-generated method stub
 //		return registrationFacade.create(registration);
 		System.out.println("Create Registration api" +organizationRegisterDto.getRegId() );
+		System.out.println("My OrgRegDtoChecking...");
 		return orfi.CreateOrganizationWithUser(organizationRegisterDto);
 //		return organizationRegisterDto;
 	}
 	
-	
+	@Path("/register1")
+	@POST
+	@ApiOperation(value = "Create a registration.", response = OrganizationRegisterDto.class)
+	@ApiResponses({ @ApiResponse(code = 403, message = "Current logged in account does not have the delegation role."),
+			@ApiResponse(code = 404, message = "Thread not found."),
+			@ApiResponse(code = 400, message = "Bad request : missing required fields."),
+			@ApiResponse(code = 500, message = "Internal server error."), })
+	@Override
+	public String create1(
+			
+			@ApiParam(value = "The user domain identifier.", required = true) OrganizationRegisterDto organizationRegisterDto
+			) throws BusinessException {
+		// TODO Auto-generated method stub
+//		return registrationFacade.create(registration);
+		System.out.println("Create Registration api" +organizationRegisterDto.getRegId() );
+		return "abdul";
+//		return organizationRegisterDto;
+	}
 	
 	
 	

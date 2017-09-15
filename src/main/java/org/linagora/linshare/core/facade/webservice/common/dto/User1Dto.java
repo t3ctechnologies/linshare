@@ -2,10 +2,14 @@ package org.linagora.linshare.core.facade.webservice.common.dto;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.linagora.linshare.core.domain.entities.User1;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
+@XmlRootElement(name = "User1Dto")
+//@ApiModel(value = "Registration", description = "A thread is a shared space for users to deposit files.")
 public class User1Dto {
 	
 	
@@ -38,11 +42,13 @@ public class User1Dto {
 	private boolean isActive;
 	private boolean isDisable;
 	private String organizationId;
-	private String registrationId;
+	
 	private String roleId;
 	
 	
-	
+	public User1Dto() {
+		super();
+	}
 	
 	
 	
@@ -126,14 +132,9 @@ public class User1Dto {
 		return organizationId;
 	}
 	public void setOrganizationId(String organizationId) {
-		organizationId = organizationId;
+		this.organizationId = organizationId;
 	}
-	public String getRegistrationId() {
-		return registrationId;
-	}
-	public void setRegistrationId(String registrationId) {
-		this.registrationId = registrationId;
-	}
+
 	public String getRoleId() {
 		return roleId;
 	}

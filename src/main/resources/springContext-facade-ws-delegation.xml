@@ -75,6 +75,7 @@
 		<constructor-arg ref="modulesRepository" />
 		<constructor-arg ref="organizationaccessRepository" />
 		<constructor-arg ref="user1Repository" />
+		<constructor-arg ref="accountRepository"/>
 	</bean>
 
 </beans>

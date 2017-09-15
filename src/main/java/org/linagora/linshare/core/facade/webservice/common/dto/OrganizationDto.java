@@ -32,19 +32,29 @@ public class OrganizationDto {
 		@ApiModelProperty(value = "latitude")
 		private String latitude;
 		
-		@ApiModelProperty(value = "role")
-		private String role;
-		
+//		@ApiModelProperty(value = "role")
+//		private String role;
+//		
 		private Date createdDate;
 		private Date modifiedDate;
 		private boolean isDemoCreated;
 		private boolean isActive;
+		private String registrationId;
 //		private String role;
+		
 		
 		public OrganizationDto() {
 			super();
 		}
 		
+		public String getRegistrationId() {
+			return registrationId;
+		}
+
+		public void setRegistrationId(String registrationId) {
+			this.registrationId = registrationId;
+		}
+
 		public OrganizationDto(Organization reg) {
 			this.id = reg.getId();
 			this.companyName = reg.getCompanyName();
@@ -148,13 +158,13 @@ public class OrganizationDto {
 			this.isActive = isActive;
 		}
 
-		public String getRole() {
-			return role;
-		}
-
-		public void setRole(String role) {
-			this.role = role;
-		}
+//		public String getRole() {
+//			return role;
+//		}
+//
+//		public void setRole(String role) {
+//			this.role = role;
+//		}
 		
 		
 	

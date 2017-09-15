@@ -1,41 +1,58 @@
 package org.linagora.linshare.core.facade.webservice.common.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
+
+@XmlRootElement(name = "OrganizationRegisterDto")
 public class OrganizationRegisterDto {
-	
-	@ApiModelProperty(value = "regid")
+	@ApiModelProperty(value = "regId")
 	private String regId;
 	
 	@ApiModelProperty(value = "user1Dto")
-	private User1Dto user1dto;
+	private User1Dto user1Dto;
 	
 	@ApiModelProperty(value = "organizationDto")
-	private OrganizationDto organizationdto;
+	private OrganizationDto organizationDto;
 	
+	private String message;
 	
-	
-	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public OrganizationRegisterDto() {
+		super();
+	}
+
 	public String getRegId() {
 		return regId;
 	}
+
 	public void setRegId(String regId) {
 		this.regId = regId;
 	}
-	public User1Dto getUser1dto() {
-		return user1dto;
+
+	public User1Dto getUser1Dto() {
+		return user1Dto;
 	}
-	public void setUser1dto(User1Dto user1dto) {
-		this.user1dto = user1dto;
+
+	public void setUser1Dto(User1Dto user1Dto) {
+		this.user1Dto = user1Dto;
 	}
-	public OrganizationDto getOrganizationdto() {
-		return organizationdto;
+
+	public OrganizationDto getOrganizationDto() {
+		return organizationDto;
 	}
-	public void setOrganizationdto(OrganizationDto organizationdto) {
-		this.organizationdto = organizationdto;
+
+	public void setOrganizationDto(OrganizationDto organizationDto) {
+		this.organizationDto = organizationDto;
 	}
-	
-	
 	
 	
 

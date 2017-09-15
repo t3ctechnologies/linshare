@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.apache.commons.lang.Validate;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+import org.linagora.linshare.core.domain.entities.Organization;
 import org.linagora.linshare.core.domain.entities.User1;
 import org.linagora.linshare.core.exception.BusinessException;
 import org.linagora.linshare.core.facade.webservice.common.dto.User1Dto;
@@ -21,17 +23,19 @@ implements User1Repository{
 	@Override
 	protected DetachedCriteria getNaturalKeyCriteria(User1 entity) {
 		// TODO Auto-generated method stub
-		return null;
+		DetachedCriteria det = DetachedCriteria.forClass(User1.class).add(
+				Restrictions.eq("organizationId", entity.getOrganizationId()));
+		return det;
 	}
 
 	public void ValidateDetails(User1Dto entity) throws BusinessException {
 		Validate.notEmpty(entity.getFirstName(), "Missing required field Name");
-		Validate.notEmpty(entity.getMiddleName(), "Missing required field companyName");
-		Validate.notEmpty(entity.getLastName(), "Missing required field latitude");
-		Validate.notEmpty(entity.getSalutation(), "Missing required field location");
-		Validate.notEmpty(entity.getPhoneNumber(), "Missing required field longitude");
-		Validate.notEmpty(entity.getEmailId(), "Missing required field role");
-	}
+		Validate.notEmpty(entity.getMiddleName(), "Missing required field MiddleName in User");
+		Validate.notEmpty(entity.getLastName(), "Missing required field Last Name");
+		Validate.notEmpty(entity.getSalutation(), "Missing required field Saluatation");
+		Validate.notEmpty(entity.getPhoneNumber(), "Missing required field Phonenumber");
+		Validate.notEmpty(entity.getEmailId(), "Missing required field email id");
+	} 
 	
 	
 	public User1 Create(User1 entity) throws BusinessException {
@@ -39,6 +43,7 @@ implements User1Repository{
 	}
 	
 	public User1Dto CreateUser(User1Dto entity) throws BusinessException {
+		System.out.println("Create User in User1RepositoryImpl");
 		Date date = new Date();
 		entity.setCreatedDate(date);
 		entity.setModifiedDate(date);

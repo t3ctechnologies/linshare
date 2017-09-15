@@ -7,4 +7,5 @@ import org.linagora.linshare.core.facade.webservice.common.dto.OrganizationRegis
 public interface OrganizationRegisterRestService {
 
 	OrganizationRegisterDto create(OrganizationRegisterDto organizationRegisterDto) throws BusinessException;
+	String create1(OrganizationRegisterDto organizationRegisterDto) throws BusinessException;
 }

@@ -18,13 +18,22 @@ public class Organization {
 	private Date modifiedDate;
 	private boolean isdemoCreated;
 	private boolean isActive;
-	private String role;
+	private String registrationId;
+//	private String role;
 	
 	
 	public Organization() {
 		super();
 	}
 	
+	public String getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
+	}
+
 	public Organization(OrganizationDto rdto) {
 		this.name = rdto.getName();
 	}
@@ -111,13 +120,13 @@ public class Organization {
 		this.isActive = isActive;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+//	public String getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(String role) {
+//		this.role = role;
+//	}
 	
 	
 }

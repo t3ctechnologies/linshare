@@ -13,13 +13,20 @@ public class User1 {
 	private String middleName;
 	private String emailId;
 	private String password;
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 	private String phoneNumber;
 	private Date createdDate;
 	private Date modifiedDate;
 	private boolean isActive;
 	private boolean isDisable;
 	private String organizationId;
-	private String registrationId;
+	
 	private String roleId;
 	
 	
@@ -41,7 +48,9 @@ public class User1 {
 		createdDate = entity.getCreatedDate();
 		modifiedDate = entity.getModifiedDate();
 		isActive = entity.getisActive();
+		System.out.println("User1 constructor setOrganizationId "+entity.getOrganizationId());
 		organizationId = entity.getOrganizationId();
+		salutation = entity.getSalutation();
 	}
 	
 	
@@ -111,10 +120,12 @@ public class User1 {
 	public void setisActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public boolean isDisable() {
+	public boolean getisDisable() {
 		return isDisable;
 	}
-	public void setDisable(boolean isDisable) {
+	
+	
+	public void setisDisable(boolean isDisable) {
 		this.isDisable = isDisable;
 	}
 	public String getOrganizationId() {
@@ -123,12 +134,7 @@ public class User1 {
 	public void setOrganizationId(String organizationId) {
 		this.organizationId = organizationId;
 	}
-	public String getRegistrationId() {
-		return registrationId;
-	}
-	public void setRegistrationId(String registrationId) {
-		this.registrationId = registrationId;
-	}
+
 	public String getRoleId() {
 		return roleId;
 	}

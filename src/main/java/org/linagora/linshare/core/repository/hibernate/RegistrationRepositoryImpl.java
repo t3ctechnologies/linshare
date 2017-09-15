@@ -1,11 +1,13 @@
 package org.linagora.linshare.core.repository.hibernate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.BooleanUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.linagora.linshare.core.domain.entities.Account;
@@ -68,7 +70,7 @@ implements RegistrationRepository{
 		reg.setCreatedDate(date);
 		reg.setEmailId(entity.getEmailId());
 		reg.setIsActive(false);
-		reg.setIsDemoCreated(true);
+		reg.setIsDemoCreated(false);
 		reg.setModifiedDate(date);
 		reg.setName(entity.getName());
 		reg.setPhoneNumber(entity.getPhoneNumber());
@@ -100,6 +102,13 @@ implements RegistrationRepository{
 			regDb.setCompanyName(entity.getCompanyName());
 		}
 		
+		if (BooleanUtils.isTrue(entity.getisActive())) {
+			regDb.setIsActive(entity.getisActive());
+		}
+		else {
+			regDb.setIsActive(false);
+		}
+		
 		Date date =new Date();
 		regDb.setModifiedDate(date);
 
@@ -113,5 +122,27 @@ implements RegistrationRepository{
 	public List<Registration> findAll() throws BusinessException{
 		return super.findAll();
 	}
+	
+	public List<RegistrationDto> findAllToDto() throws BusinessException {
+		List<Registration> list = findAll();
+		List<RegistrationDto> listDto = new ArrayList<RegistrationDto>();
+		for(Registration reg : list) {
+				//convert reg to registrationDto
+				RegistrationDto regDto = new RegistrationDto(reg);
+				listDto.add(regDto);
+			}
+		return listDto;
+	}
 
+	public boolean checkRegId(String id){
+		RegistrationRepositoryImpl rri = null ;
+		List reg= rri.findAll();
+		
+		return true;
+	}
+	
+	public void approve(RegistrationDto entity) throws BusinessException {
+		entity.setisActive(true);
+		this.update(entity);
+	}
 }

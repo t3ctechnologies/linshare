@@ -107,5 +107,15 @@ public class OrganizationRepositoryImpl extends GenericOrganizationAccountReposi
 //		rdto.setDetails(reg1.getName(), reg1.getId());
 		return rdto;
 	}
+	
+	//common
+	public void ValidateDetails(OrganizationDto entity) throws BusinessException {
+		Validate.notEmpty(entity.getName(), "Missing required field Name");
+		Validate.notEmpty(entity.getCompanyName(), "Missing required field companyName");
+		Validate.notEmpty(entity.getLatitude(), "Missing required field latitude");
+		Validate.notEmpty(entity.getLocation(), "Missing required field location");
+		Validate.notEmpty(entity.getLongitude(), "Missing required field longitude");
+		Validate.notEmpty(entity.getRole(), "Missing required field role");
+	}
 
 }

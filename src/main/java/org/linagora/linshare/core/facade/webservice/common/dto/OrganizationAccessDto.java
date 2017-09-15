@@ -4,7 +4,9 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang.Validate;
 import org.linagora.linshare.core.domain.entities.OrganizationAccess;
+import org.linagora.linshare.core.exception.BusinessException;
 
 import com.wordnik.swagger.annotations.ApiModelProperty;
 @XmlRootElement(name = "OrganizationAccess")
@@ -26,24 +28,24 @@ public class OrganizationAccessDto {
 	@ApiModelProperty(value = "subscriptionId")
 	private String subscriptionId;
 	
-	@ApiModelProperty(value = "userId")
-	private String userId;
-	@ApiModelProperty(value = "role")
-	private String role;
-	
+//	@ApiModelProperty(value = "userId")
+//	private String userId;
+//	@ApiModelProperty(value = "role")
+//	private String role;
+//	
 	private Date createdDate;
 	private Date modifiedDate;
 	private boolean isdemoCreated;
 	private boolean isActive;
 	
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+//	public String getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
 
 	
 	
@@ -52,12 +54,22 @@ public class OrganizationAccessDto {
 		super();
 	}
 	
+	public OrganizationAccessDto(String moduleId, String organizationId, String status, String subsId ){
+		this.moduleId = moduleId;
+		this.organizationId = organizationId;
+		this.statusId = status;
+		this.subscriptionId = subsId;
+		Date date = new Date();
+		this.createdDate = date;
+		this.modifiedDate = date;
+	}
+	
 	public OrganizationAccessDto(OrganizationAccess reg) {
 		this.id = reg.getId();
-		this.isActive = reg.getisActive();
-		this.isdemoCreated = reg.isIsdemoCreated();
+//		this.isActive = reg.getisActive();
+//		this.isdemoCreated = reg.isIsdemoCreated();
 		this.moduleId = reg.getModuleId();
-		this.userId = reg.getUserId();
+//		this.userId = reg.getUserId();
 		this.modifiedDate = reg.getModifiedDate();
 		this.organizationId = reg.getOrganizationId();
 		this.subscriptionId = reg.getSubscriptionId();
@@ -111,13 +123,13 @@ public class OrganizationAccessDto {
 		this.subscriptionId = subscriptionId;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+//	public String getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(String role) {
+//		this.role = role;
+//	}
 
 	public Date getCreatedDate() {
 		return createdDate;
@@ -149,5 +161,12 @@ public class OrganizationAccessDto {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+	
+	public void validateMe() throws BusinessException {
+		Validate.notEmpty(moduleId, "Missing required field ModuleId");
+		Validate.notEmpty(organizationId, "Missing required field OrganizationId");
+		Validate.notEmpty(subscriptionId, "Missing required field StatusId");
+		Validate.notEmpty(statusId, "Missing required field SubscriptionId");
 	}
 }

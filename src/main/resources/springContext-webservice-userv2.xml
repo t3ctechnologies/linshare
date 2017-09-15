@@ -87,6 +87,7 @@
 	
 	<bean id="registrationRestService" class="org.linagora.linshare.webservice.registration.impl.RegistrationRestServiceImpl">
 		<constructor-arg ref="registrationRepository" />
+		<!-- <constructor-arg ref="notifierService"/> -->
 	</bean>
 	
 	<bean id="modulesRestService" class="org.linagora.linshare.webservice.registration.impl.ModuleRestServiceImpl">
@@ -105,9 +106,16 @@
 		<constructor-arg ref="organizationdetailsRepository" />
 	</bean>
 	
+	
+	
+	<bean id="organizationRegisterRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationRegisterRestServiceImpl">
+		<constructor-arg ref="wsOrganizationRegisterFacade" />
+	</bean>
+	
 
 	<jaxrs:server id="userRestContainer" address="/rest/user/v2">
 		<jaxrs:serviceBeans>
+		<ref bean="organizationRegisterRestService" />
 		<ref bean="registrationRestService" />
 		<ref bean="modulesRestService" />
 		<ref bean="organizationRestService" />

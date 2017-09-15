@@ -15,22 +15,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.linagora.linshare.core.domain.entities.Registration;
+import org.linagora.linshare.core.domain.objects.MailContainer;
 import org.linagora.linshare.core.exception.BusinessException;
-import org.linagora.linshare.core.facade.webservice.common.dto.GuestDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
-import org.linagora.linshare.core.facade.webservice.common.dto.WorkGroupMemberDto;
-import org.linagora.linshare.core.facade.webservice.registration.RegistrationFacade;
-import org.linagora.linshare.core.facade.webservice.user.WorkGroupFacade;
-import org.linagora.linshare.core.facade.webservice.user.dto.DocumentDto;
-import org.linagora.linshare.core.repository.AbstractRepository;
-import org.linagora.linshare.core.repository.ThreadRepository;
-import org.linagora.linshare.core.repository.hibernate.AbstractRegistrationImpl;
 import org.linagora.linshare.core.repository.hibernate.RegistrationRepositoryImpl;
+import org.linagora.linshare.core.service.impl.MailNotifierServiceImpl;
 import org.linagora.linshare.webservice.WebserviceBase;
 import org.linagora.linshare.webservice.annotations.NoCache;
 import org.linagora.linshare.webservice.registration.RegistrationRestService;
-import org.springframework.orm.hibernate3.HibernateTemplate;
-
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -44,9 +36,11 @@ description = "threads service.")
 public class RegistrationRestServiceImpl extends WebserviceBase implements RegistrationRestService{
 	
 	RegistrationRepositoryImpl rri;
+	MailNotifierServiceImpl notifierService;
 	
 	public RegistrationRestServiceImpl(RegistrationRepositoryImpl pRri) {
 		this.rri = pRri;
+//		this.notifierService = pNS;
 	}
 	
 
@@ -65,28 +59,9 @@ public class RegistrationRestServiceImpl extends WebserviceBase implements Regis
 		// TODO Auto-generated method stub
 //		return registrationFacade.create(registration);
 		System.out.println("Create Registration api" +registrationDto.getName() );
-//		Registration reg = new Registration() ;
-//		Date date =new Date();
-//		reg.setCompanyName(registrationDto.getCompanyName());
-//		reg.setCreatedDate(date);
-//		reg.setEmailId(registrationDto.getEmailId());
-////		reg.setEmailId("Emailid");
-//		reg.setIsActive(false);
-//		reg.setIsDemoCreated(true);
-//		reg.setModifiedDate(date);
-//		reg.setName(registrationDto.getName());
-////		reg.setName("NAME");
-//		reg.setPhoneNumber(registrationDto.getPhoneNumber());
-////		reg.setPhoneNumber("0000000000");
-//		reg.setRole("hjhjh");
-//		System.out.println("is this working..."+reg.getCompanyName());
-//		Registration registration = rri.create(reg);
-//		System.out.println("is this working..."+registration.getId());
-////		RegistrationDto rdto = new RegistrationDto();
-//		RegistrationDto rdto = new RegistrationDto(registration);
-////		rdto.setDetails(registration.getName(), registration.getId());
-//		return rdto;
-		return rri.createLogic(registrationDto);
+		RegistrationDto rdto = rri.createLogic(registrationDto);
+		
+		return rdto;
 	}
 	
 	
@@ -139,14 +114,7 @@ public class RegistrationRestServiceImpl extends WebserviceBase implements Regis
 	@Override
 	public List<RegistrationDto> findAll() throws BusinessException {
 		// TODO Auto-generated method stub
-		List<Registration> list = rri.findAll();
-		List<RegistrationDto> listDto = new ArrayList<RegistrationDto>();
-		for(Registration reg : list) {
-				//convert reg to registrationDto
-				RegistrationDto regDto = new RegistrationDto(reg);
-				listDto.add(regDto);
-			}
-		return listDto;
+		return rri.findAllToDto();
 	}
 	
 }

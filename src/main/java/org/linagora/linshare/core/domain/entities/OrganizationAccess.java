@@ -9,20 +9,20 @@ public class OrganizationAccess {
 	private String moduleId;
 	private String organizationId;
 	private String subscriptionId;
-	private boolean isdemoCreated;
+//	private boolean isdemoCreated;
 	private String statusId;
-	private String userId;
+//	private String userId;
 	private Date createdDate;
 	private Date modifiedDate;
-	private boolean isActive;
-	private String role;
+//	private boolean isActive;
+//	private String role;
 	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+//	public String getUserId() {
+//		return userId;
+//	}
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
 	
 	public String getId() {
 		return id;
@@ -48,12 +48,12 @@ public class OrganizationAccess {
 	public void setSubscriptionId(String subscriptionId) {
 		this.subscriptionId = subscriptionId;
 	}
-	public boolean isIsdemoCreated() {
-		return isdemoCreated;
-	}
-	public void setIsdemoCreated(boolean isdemoCreated) {
-		this.isdemoCreated = isdemoCreated;
-	}
+//	public boolean isIsdemoCreated() {
+//		return isdemoCreated;
+//	}
+//	public void setIsdemoCreated(boolean isdemoCreated) {
+//		this.isdemoCreated = isdemoCreated;
+//	}
 	public String getStatusId() {
 		return statusId;
 	}
@@ -72,18 +72,18 @@ public class OrganizationAccess {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	public boolean getisActive() {
-		return isActive;
-	}
-	public void setisActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
+//	public boolean getisActive() {
+//		return isActive;
+//	}
+//	public void setisActive(boolean isActive) {
+//		this.isActive = isActive;
+//	}
+//	public String getRole() {
+//		return role;
+//	}
+//	public void setRole(String role) {
+//		this.role = role;
+//	}
+//	
 	
 }

@@ -47,6 +47,8 @@ public class RegistrationDto {
 		this.phoneNumber = reg.getPhoneNumber();
 		this.createdDate = reg.getCreatedDate();
 		this.modifiedDate = reg.getModifiedDate();
+		this.isActive = reg.getIsActive();
+		this.isDemoCreated = reg.getIsDemoCreated();
 	}
 	
 	public void setDetails(String name, String id) {
@@ -109,5 +111,4 @@ public class RegistrationDto {
 		this.isActive = isActive;
 	}
 
-	
 }

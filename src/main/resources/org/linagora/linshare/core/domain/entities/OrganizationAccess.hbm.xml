@@ -11,13 +11,13 @@
     <property name="moduleId" column="moduleId"></property>  
     <property name="organizationId" column="organizationId"></property>
     <property name="subscriptionId" column="subscriptionId"></property>
-    <property name="isdemoCreated" column="isdemoCreated"></property>
+    <!-- <property name="isdemoCreated" column="isdemoCreated"></property> -->
     <property name="statusId" column="statusId"></property>
-     <property name="userId" column="userId"></property>  
+     <!-- <property name="userId" column="userId"></property>   -->
     <property name="createdDate" column="createdDate"></property>
     <property name="modifiedDate" column="modifiedDate"></property>
-    <property name="isActive" column="isActive"></property>
-    <property name="role" column="role"></property>
+    <!-- <property name="isActive" column="isActive"></property>
+    <property name="role" column="role"></property> -->
    
     
     

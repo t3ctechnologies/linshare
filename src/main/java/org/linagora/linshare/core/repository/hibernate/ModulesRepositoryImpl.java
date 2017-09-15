@@ -1,6 +1,7 @@
 package org.linagora.linshare.core.repository.hibernate;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.Validate;
 import org.hibernate.criterion.DetachedCriteria;
@@ -79,6 +80,10 @@ implements ModulesRepository{
 	}
 	
 
+	public List<Modules> findAll() throws BusinessException {
+		return super.findAll();
+	}
+	
 	public ModulesDto update(ModulesDto reg) throws BusinessException {
 		Validate.notEmpty(reg.getId(), "Missing required field Id"); {
 		

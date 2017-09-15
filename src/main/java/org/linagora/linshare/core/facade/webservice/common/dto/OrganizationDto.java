@@ -72,10 +72,12 @@ public class OrganizationDto {
 		}
 
 		public String getName() {
+			
 			return name;
 		}
 
 		public void setName(String name) {
+			System.out.println("Organization setName "+name);
 			this.name = name;
 		}
 
@@ -108,6 +110,7 @@ public class OrganizationDto {
 		}
 
 		public void setLatitude(String latitude) {
+			System.out.println("Organization setLatitude "+latitude);
 			this.latitude = latitude;
 		}
 
@@ -120,10 +123,12 @@ public class OrganizationDto {
 		}
 
 		public Date getModifiedDate() {
+			
 			return modifiedDate;
 		}
 
 		public void setModifiedDate(Date modifiedDate) {
+			System.out.println("Organization Modified Date ");
 			this.modifiedDate = modifiedDate;
 		}
 

@@ -31,41 +31,43 @@ public class OrganizationAccessRepositoryImpl extends GenericOrganizationAccessA
 	public OrganizationAccess create(OrganizationAccess entity) throws BusinessException {
 //		entity.setCompanyName("asd");
 		System.out.println("OrganizationAccessRepositoryImpl Create");
+		this.ValidateEntity(entity);
+		
+		return super.create(entity);
+	}
+	
+	public void ValidateEntity(OrganizationAccess entity) throws BusinessException {
 		Validate.notEmpty(entity.getModuleId(), "Missing required field ModuleId");
 		Validate.notEmpty(entity.getOrganizationId(), "Missing required field OrganizationId");
 		Validate.notEmpty(entity.getStatusId(), "Missing required field StatusId");
 		Validate.notEmpty(entity.getSubscriptionId(), "Missing required field SubscriptionId");
-		Validate.notEmpty(entity.getRole(), "Missing required field Role");
-		Validate.notEmpty(entity.getUserId(), "Missing required field userId");
 		
-		
-		return super.create(entity);
+	}
+	
+	
+	public void ValidateDto(OrganizationAccessDto entity) throws BusinessException {
+		entity.validateMe();
+
 	}
 	
 	
 //	@Override
 	public OrganizationAccessDto createLogic(OrganizationAccessDto entity) throws BusinessException {
 		System.out.println("OrganizationAccessRepositoryImpl Create");
-		Validate.notEmpty(entity.getModuleId(), "Missing required field ModuleId");
-		Validate.notEmpty(entity.getOrganizationId(), "Missing required field OrganizationId");
-		Validate.notEmpty(entity.getStatusId(), "Missing required field StatusId");
-		Validate.notEmpty(entity.getSubscriptionId(), "Missing required field SubscriptionId");
-		Validate.notEmpty(entity.getRole(), "Missing required field Role");
-		Validate.notEmpty(entity.getUserId(), "Missing required field userId");
+		ValidateDto(entity);
 		
 		
         OrganizationAccess reg = new OrganizationAccess() ;
 		Date date =new Date();
 		reg.setModifiedDate(date);
 		reg.setModuleId(entity.getModuleId());
-		reg.setUserId(entity.getUserId());
+		
 		reg.setCreatedDate(date);
 		reg.setOrganizationId(entity.getOrganizationId());
-		reg.setisActive(false);
-		reg.setIsdemoCreated(true);
+		
 		reg.setStatusId(entity.getStatusId());
-		reg.setSubscriptionId(entity.getSubscriptionId());
-		reg.setRole("hjhjh");
+		reg.setSubscriptionId("1");
+		
 		
 		OrganizationAccess reg1 = super.create(reg);
 		return new OrganizationAccessDto(reg1);
@@ -89,9 +91,9 @@ public class OrganizationAccessRepositoryImpl extends GenericOrganizationAccessA
 		}
 		
 		
-		if(entity.getUserId()!= null) {
-			regDb.setUserId(entity.getUserId());
-		}
+//		if(entity.getUserId()!= null) {
+//			regDb.setUserId(entity.getUserId());
+//		}
 		
 		if(entity.getCreatedDate() != null) {
 			regDb.setCreatedDate(entity.getCreatedDate());

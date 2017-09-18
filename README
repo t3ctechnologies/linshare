@@ -3,18 +3,19 @@
 
 ## Table of Contents
 
-- [Pre-requisite](#pre-requisite)
+- [PreRequisite](#prerequisite)
 - [Eclipse Plugin](#eclipse plugin)
 
 
-## Pre-requisite:
+## PreRequisite
+
 1. Eclipse Neon
 2. Git Client
 3. MySQl workbench 6.3 and MongoDb 3.4
 4. Java SDK 8 
 
 
-Eclipse Plugin:
+## Eclipse Plugin
 * eGit 
 * Maven 3.5.0 Integration for Eclipse
 * Run-jetty-Run

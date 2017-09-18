@@ -314,4 +314,8 @@
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
 	
+	<bean name="account1Repository" class="org.linagora.linshare.core.repository.hibernate.Account1RepositoryImpl">
+		<constructor-arg ref="hibernateTemplate" />
+	</bean>
+	
 </beans>

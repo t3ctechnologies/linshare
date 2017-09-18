@@ -1,30 +1,60 @@
 package org.linagora.linshare.core.facade.webservice.delegation.impl;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.Validate;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 //import org.apache.jackrabbit.oak.spi.whiteboard.Registration;
 import org.linagora.linshare.core.domain.entities.Registration;
 import org.linagora.linshare.core.exception.BusinessException;
+import org.linagora.linshare.core.facade.webservice.common.dto.DomainDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.OrganizationAccessDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.OrganizationDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.OrganizationRegisterDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.User1Dto;
 import org.linagora.linshare.core.facade.webservice.delegation.OrganizationRegisterFacade;
+import org.linagora.linshare.core.repository.AbstractDomainRepository;
+import org.linagora.linshare.core.repository.AccountRepository;
+import org.linagora.linshare.core.repository.hibernate.AbstractDomainRepositoryImpl;
+import org.linagora.linshare.core.repository.hibernate.Account1RepositoryImpl;
+import org.linagora.linshare.core.repository.hibernate.AccountQuotaRepositoryImpl;
 import org.linagora.linshare.core.repository.hibernate.AccountRepositoryImpl;
+import org.linagora.linshare.core.repository.hibernate.ContainerQuotaRepositoryImpl;
+import org.linagora.linshare.core.repository.hibernate.DomainQuotaRepositoryImpl;
 import org.linagora.linshare.core.repository.hibernate.ModulesRepositoryImpl;
 import org.linagora.linshare.core.repository.hibernate.OrganizationAccessRepositoryImpl;
 import org.linagora.linshare.core.repository.hibernate.OrganizationRepositoryImpl;
 import org.linagora.linshare.core.repository.hibernate.RegistrationRepositoryImpl;
 import org.linagora.linshare.core.repository.hibernate.User1RepositoryImpl;
 import org.linagora.linshare.core.utils.HashUtils;
+import org.linagora.linshare.repository.hibernate.AccountRepositoryImplTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.test.context.ContextConfiguration;
 import org.linagora.linshare.core.domain.constants.AccountType;
 import org.linagora.linshare.core.domain.constants.ContainerQuotaType;
+import org.linagora.linshare.core.domain.constants.DomainType;
+import org.linagora.linshare.core.domain.constants.LinShareConstants;
+import org.linagora.linshare.core.domain.entities.AbstractDomain;
 import org.linagora.linshare.core.domain.entities.Account;
+import org.linagora.linshare.core.domain.entities.Account1;
+import org.linagora.linshare.core.domain.entities.ContainerQuota;
+import org.linagora.linshare.core.domain.entities.DomainQuota;
+import org.linagora.linshare.core.domain.entities.Internal;
 import org.linagora.linshare.core.domain.entities.Modules;
+import org.linagora.linshare.core.domain.entities.Quota;
 
-public class OrganizationRegisterFacadeImpl implements OrganizationRegisterFacade {
+
+@ContextConfiguration(locations={
+        "classpath:springContext-repository.xml"})
+public class OrganizationRegisterFacadeImpl {
 	
 	RegistrationRepositoryImpl rri;
 	OrganizationRepositoryImpl ori;
@@ -32,8 +62,41 @@ public class OrganizationRegisterFacadeImpl implements OrganizationRegisterFacad
 	OrganizationAccessRepositoryImpl oari;
 	User1RepositoryImpl uri;
 	AccountRepositoryImpl ari;
+	Account1RepositoryImpl a1ri;
+//	private AbstractDomainRepository adRepo;
+
+	AbstractDomainRepositoryImpl abstractDRi;
+	AccountQuotaRepositoryImpl accountQuotaRepositoryImpl;
+	DomainQuotaRepositoryImpl domainQuotaRepositoryImpl;
+	ContainerQuotaRepositoryImpl containerQuotaRepositoryImpl;
+	
+	//todo
+	// default import.sql
+		private static final String DOMAIN_IDENTIFIER = LinShareConstants.rootDomainIdentifier;
+
+	    private static final String FIRST_NAME = "first name";
+	    private static final String LAST_NAME = "last name";
+	    private static final String MAIL = "mail";
+	    private static final String UID = "uid";
+	     
+	     
+		@Autowired
+		@Qualifier("accountRepository")
+		private AccountRepository<Account> accountRepository;
+		
+		@Autowired
+		private AbstractDomainRepository abstractDomainRepository;
+	
+	public OrganizationRegisterFacadeImpl() {
+		
+	}
+
+
 	public OrganizationRegisterFacadeImpl(RegistrationRepositoryImpl rri, OrganizationRepositoryImpl ori,
-			ModulesRepositoryImpl mri, OrganizationAccessRepositoryImpl oari, User1RepositoryImpl uri, AccountRepositoryImpl ari) {
+			ModulesRepositoryImpl mri, OrganizationAccessRepositoryImpl oari, User1RepositoryImpl uri, AccountRepositoryImpl ari,Account1RepositoryImpl a1ri,
+			AbstractDomainRepositoryImpl abDRi,
+			AccountQuotaRepositoryImpl aqri, DomainQuotaRepositoryImpl dqri, ContainerQuotaRepositoryImpl cqri
+			) {
 		super();
 		this.rri = rri;
 		this.ori = ori;
@@ -41,6 +104,12 @@ public class OrganizationRegisterFacadeImpl implements OrganizationRegisterFacad
 		this.oari = oari;
 		this.uri = uri;
 		this.ari = ari;
+		this.a1ri = a1ri;
+//		this.adRepo = adRepo;
+		this.abstractDRi = abDRi;
+		this.accountQuotaRepositoryImpl = aqri;
+		this.domainQuotaRepositoryImpl = dqri;
+		this.containerQuotaRepositoryImpl = cqri;
 	}
 	
 	
@@ -140,5 +209,113 @@ public class OrganizationRegisterFacadeImpl implements OrganizationRegisterFacad
 		return entity;
 	}
 	
+	public void createUserActor(OrganizationRegisterDto entity) throws BusinessException {
+		System.out.println("CreateuserActor");
+		
+		Account account = new Account() {
+			
+			@Override
+			public String getFullName() {
+				// TODO Auto-generated method stub
+				return entity.getUser1Dto().getFirstName();
+			}
+			
+			@Override
+			public ContainerQuotaType getContainerQuotaType() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public AccountType getAccountType() {
+				// TODO Auto-generated method stub
+				
+				return AccountType.GUEST;
+			}
+			
+			@Override
+			public String getAccountRepresentation() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			
+		};
+		System.out.println("gafur check1 "+entity.getUser1Dto().getEmailId());
+		account.setPassword(HashUtils.hashSha1withBase64(entity.getUser1Dto().getPassword().getBytes()));
+		account.setLsUuid(entity.getUser1Dto().getEmailId());
+		account.setMail(entity.getUser1Dto().getEmailId());
+		System.out.println("Account is "+account);
+		System.out.println("Entity is "+entity);
+		System.out.println("Account mail is "+account.getMail());
+		System.out.println("Account password is "+account.getPassword());
+		Account account1 = ari.create(account);
+	}
+
+	public void createUserActor1(OrganizationRegisterDto entity) throws BusinessException {
+		 Date date = new Date();
+		 System.out.println("CreateUserActor1......");
+		Account1 account = new Account1();
+		 System.out.println("gafur check1 "+entity.getUser1Dto().getEmailId());
+			account.setPassword(HashUtils.hashSha1withBase64(entity.getUser1Dto().getPassword().getBytes()));
+			account.setLsUuid(entity.getUser1Dto().getEmailId());
+			account.setMail(entity.getUser1Dto().getEmailId());
+			account.setDomain(1);
+			
+			
+			
+//			DomainDto dDto = new DomainDto();
+//			dDto.setIdentifier("1");
+//			dDto.setType("0");
+//			
+//			DomainType domainType = DomainType.valueOf(dDto.getType());
+//			AbstractDomain parent = abstractDomainService.retrieveDomain(domainDto
+//					.getParent());
+//			AbstractDomain domain = domainType.getDomain(dDto, parent);
+//			
+//			
+//			account.setDomain(domain);
+			
+			
+			
+			account.setCreationDate(date);
+			account.setModificationDate(date);
+			account.setLocale("en");
+			account.setExternalMailLocale("en");
+			account.setEnable(true);
+			account.setAccount_type(6);
+			account.setDestroyed(0);
+			account.setPurgeStep("In USE");
+			account.setCmisLocale("en");
+//			account.setOwner(0);
+			System.out.println("Account is "+account);
+			System.out.println("Entity is "+entity);
+			System.out.println("Account mail is "+account.getMail());
+			System.out.println("Account password is "+account.getPassword());
+			Account1 account1 = a1ri.create(account);
+		 
+//		  User user = new User("", "", true, false, false, false);
+	   	}
+
+	public void createUserActor2(OrganizationRegisterDto entity) throws BusinessException {
+			System.out.println("My abdul check 1 "+entity.getRegId());
+			AbstractDomain domain = abstractDRi.findById(DOMAIN_IDENTIFIER);
+			Internal u =  new Internal("firstName", "lastName", entity.getUser1Dto().getEmailId(), UID);
+			u.setLocale(domain.getDefaultTapestryLocale());
+			u.setCmisLocale(domain.getDefaultTapestryLocale().toString());
+			u.setDomain(domain);
+			u.setPassword(HashUtils.hashSha1withBase64(entity.getUser1Dto().getPassword().getBytes()));
+			Account acct = ari.create(u);
+			
+			///todo
+			AbstractDomain domain2 = acct.getDomain();
+			AbstractDomain domain1 = domain2.getParentDomain();
+			
+			Quota result = accountQuotaRepositoryImpl.find(acct);
+			assertNotNull(result);
+			DomainQuota domain2Quota = domainQuotaRepositoryImpl.find(domain2);
+			ContainerQuota entity1 = new ContainerQuota(domain2, domain1, domain2Quota, 100, 90, 10, 40, 20, ContainerQuotaType.WORK_GROUP);
+			containerQuotaRepositoryImpl.create(entity1);
+	}
 	
 }

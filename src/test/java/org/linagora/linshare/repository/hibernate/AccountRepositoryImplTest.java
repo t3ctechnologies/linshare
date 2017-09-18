@@ -40,6 +40,7 @@ import org.linagora.linshare.core.domain.entities.Account;
 import org.linagora.linshare.core.domain.entities.Internal;
 import org.linagora.linshare.core.domain.entities.User;
 import org.linagora.linshare.core.exception.BusinessException;
+import org.linagora.linshare.core.facade.webservice.common.dto.OrganizationRegisterDto;
 import org.linagora.linshare.core.repository.AbstractDomainRepository;
 import org.linagora.linshare.core.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,17 @@ public class AccountRepositoryImplTest extends AbstractTransactionalJUnit4Spring
 		AbstractDomain domain = abstractDomainRepository.findById(DOMAIN_IDENTIFIER);
 		
 		User u = new Internal(FIRST_NAME, LAST_NAME, MAIL, UID);
+		u.setLocale(domain.getDefaultTapestryLocale());
+		u.setCmisLocale(domain.getDefaultTapestryLocale().toString());
+		u.setDomain(domain);
+		accountRepository.create(u);
+	}
+	
+	public void testCreateInternalUser1(OrganizationRegisterDto entity) throws BusinessException{
+		System.out.println("test create internal user1");
+		AbstractDomain domain = abstractDomainRepository.findById(DOMAIN_IDENTIFIER);
+		
+		User u = new Internal("SGSSGS", "bangalore", "sgs@gmail.com", UID);
 		u.setLocale(domain.getDefaultTapestryLocale());
 		u.setCmisLocale(domain.getDefaultTapestryLocale().toString());
 		u.setDomain(domain);

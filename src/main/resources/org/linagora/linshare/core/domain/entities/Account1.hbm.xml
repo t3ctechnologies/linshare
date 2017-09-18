@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="org.linagora.linshare.core.domain.entities.Account1" table="account">  
+     <id name="id" column="id">  
+     <generator class="increment"></generator>  
+    </id>
+       
+            
+    <!-- 
+    <property name="technical_account_permission_id" column="technical_account_permission_id"></property>  -->
+  
+    <property name="lsUuid" column="ls_uuid"></property>
+    <property name="mail" column="mail"></property>
+    <property name="creationDate" column="creation_date"></property>
+    <property name="modificationDate" column="modification_date"></property>
+    <property name="role" column="role_id"></property>
+    <property name="locale" column="locale"></property>
+    <property name="externalMailLocale" column="external_mail_locale"></property>
+    <property name="enable" column="enable"></property>
+    <property name="account_type" column="account_type"></property>
+    <property name="password" column="password"></property>
+    <property name="destroyed" column="destroyed"></property>
+    <property name="purgeStep" column="purge_step"></property>
+    <property name="cmisLocale" column="cmis_locale"></property>
+    <!-- <property name="domain" column="domain_id"></property> -->
+    <!-- <property name="owner" column="owner_id"></property> -->
+    <many-to-one name="owner" column="owner_id" class="org.linagora.linshare.core.domain.entities.Account1" lazy="proxy"/>
+    <many-to-one name="permission" cascade="lock" column="technical_account_permission_id"
+		class="org.linagora.linshare.core.domain.entities.TechnicalAccountPermission" not-null="false" lazy="proxy">
+	</many-to-one>
+	
+	<many-to-one name="domain" column="domain_id" class="org.linagora.linshare.core.domain.entities.AbstractDomain" not-null="true"
+		lazy="no-proxy" fetch="join" >
+	</many-to-one>
+    
+    <!-- <many-to-one name="owner" column="owner_id" class="org.linagora.linshare.core.domain.entities.Account1" lazy="proxy"/>
+		<many-to-one name="domain" column="domain_id" class="org.linagora.linshare.core.domain.entities.AbstractDomain" not-null="true"
+			lazy="no-proxy" fetch="join" >
+		</many-to-one> -->
+    
+  </class>  
+</hibernate-mapping>
+

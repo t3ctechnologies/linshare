@@ -88,6 +88,7 @@
 		<mapping resource="org/linagora/linshare/core/domain/entities/OrganizationAccess.hbm.xml"/>
 		<mapping resource="org/linagora/linshare/core/domain/entities/OrganizationDetails.hbm.xml"/>
 		<mapping resource="org/linagora/linshare/core/domain/entities/User1.hbm.xml"/>
+		<mapping resource="org/linagora/linshare/core/domain/entities/Account1.hbm.xml"/>
 		
 		
 		

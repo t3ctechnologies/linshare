@@ -39,6 +39,7 @@ import java.util.UUID;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.linagora.linshare.core.domain.entities.Account;
+import org.linagora.linshare.core.domain.entities.Account1;
 import org.linagora.linshare.core.exception.BusinessException;
 import org.linagora.linshare.core.repository.AccountRepository;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -51,6 +52,7 @@ public class AccountRepositoryImpl extends GenericAccountRepositoryImpl<Account>
 
 	@Override
 	public Account create(Account entity) throws BusinessException {
+		System.out.println("ACcount is creating");
 		entity.setCreationDate(new Date());
 		entity.setModificationDate(new Date());
 		entity.setLsUuid(UUID.randomUUID().toString());
@@ -60,7 +62,7 @@ public class AccountRepositoryImpl extends GenericAccountRepositoryImpl<Account>
 	@Override
 	protected DetachedCriteria getNaturalKeyCriteria(Account account) {
 		DetachedCriteria det = DetachedCriteria.forClass(Account.class).add(
-				Restrictions.eq("lsUuid", account.getLsUuid()));
+				Restrictions.eq("lsUuid", account.getMail()));
 		return det;
 	}
 
@@ -69,4 +71,7 @@ public class AccountRepositoryImpl extends GenericAccountRepositoryImpl<Account>
 		entity.setModificationDate(new Date());
 		return super.update(entity);
 	}
+	
+	
+	
 }

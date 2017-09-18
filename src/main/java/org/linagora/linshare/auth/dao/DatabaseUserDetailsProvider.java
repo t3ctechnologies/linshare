@@ -60,15 +60,19 @@ public class DatabaseUserDetailsProvider extends UserDetailsProvider {
 	public User retrieveUser(String domainIdentifier, String login) {
 		User account = null;
 		if (domainIdentifier == null) {
+			System.out.println("retrieveUser domainidentifier is null");
 			// looking into the database for a user with his login ie username (could be a mail or a LDAP uid)
 			try {
+				System.out.println("retrieveUser try block "+userRepositories);
 				for (UserRepository<User> repository : userRepositories) {
 					account = repository.findByLogin(login);
+					System.out.println("retrieveUser try block for loop account "+account);
 					if (account != null) {
 						break;
 					}
 				}
 			} catch (IllegalStateException e) {
+				System.out.println("retrieveUser catch block ");
 				throw new AuthenticationServiceException(
 						"Could not authenticate user: " + login);
 			}

@@ -1,5 +1,13 @@
 
-Pre-requisite:
+# LinShare
+
+## Table of Contents
+
+- [Pre-requisite](#pre-requisite)
+- [Eclipse Plugin](#eclipse plugin)
+
+
+## Pre-requisite:
 1. Eclipse Neon
 2. Git Client
 3. MySQl workbench 6.3 and MongoDb 3.4

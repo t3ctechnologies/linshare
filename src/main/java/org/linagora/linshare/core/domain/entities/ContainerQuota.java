@@ -106,6 +106,7 @@ public class ContainerQuota extends Quota {
 			long quotaWarning, long fileSizeMax, long currentValue, long lastValue, ContainerQuotaType containerType) {
 		super(domain, parentDomain, quota, quotaWarning);
 
+		System.out.println("ContainerQuota Constructor");
 		// Link to the parent
 		this.domainQuota = domainQuota;
 

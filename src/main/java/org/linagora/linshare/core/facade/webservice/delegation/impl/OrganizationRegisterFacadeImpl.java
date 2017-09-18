@@ -300,21 +300,28 @@ public class OrganizationRegisterFacadeImpl {
 	public void createUserActor2(OrganizationRegisterDto entity) throws BusinessException {
 			System.out.println("My abdul check 1 "+entity.getRegId());
 			AbstractDomain domain = abstractDRi.findById(DOMAIN_IDENTIFIER);
-			Internal u =  new Internal("firstName", "lastName", entity.getUser1Dto().getEmailId(), UID);
+			System.out.println("domain "+domain);
+			Internal u =  new Internal(entity.getUser1Dto().getFirstName(), entity.getUser1Dto().getLastName(), entity.getUser1Dto().getEmailId(), UID);
 			u.setLocale(domain.getDefaultTapestryLocale());
 			u.setCmisLocale(domain.getDefaultTapestryLocale().toString());
 			u.setDomain(domain);
 			u.setPassword(HashUtils.hashSha1withBase64(entity.getUser1Dto().getPassword().getBytes()));
 			Account acct = ari.create(u);
-			
+			System.out.println("acct "+acct);
 			///todo
+		
 			AbstractDomain domain2 = acct.getDomain();
+			System.out.println("domain2 "+domain2);
+		
 			AbstractDomain domain1 = domain2.getParentDomain();
-			
+			System.out.println("domain1 "+domain1);
 			Quota result = accountQuotaRepositoryImpl.find(acct);
-			assertNotNull(result);
+			System.out.println("result is "+result);
 			DomainQuota domain2Quota = domainQuotaRepositoryImpl.find(domain2);
+			System.out.println("domain2Quota "+domain2Quota);
+			System.out.println("ContainerQuotaType.work_group is "+ContainerQuotaType.WORK_GROUP);
 			ContainerQuota entity1 = new ContainerQuota(domain2, domain1, domain2Quota, 100, 90, 10, 40, 20, ContainerQuotaType.WORK_GROUP);
+			System.out.println("entity1 is "+entity1);
 			containerQuotaRepositoryImpl.create(entity1);
 	}
 	

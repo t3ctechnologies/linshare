@@ -9,4 +9,5 @@ public interface OrganizationRegisterRestService {
 	OrganizationRegisterDto create(OrganizationRegisterDto organizationRegisterDto) throws BusinessException;
 	String create1(OrganizationRegisterDto organizationRegisterDto) throws BusinessException;
 	String create2(OrganizationRegisterDto organizationRegisterDto) throws BusinessException;
+	String create2Delete(OrganizationRegisterDto organizationRegisterDto) throws BusinessException;
 }

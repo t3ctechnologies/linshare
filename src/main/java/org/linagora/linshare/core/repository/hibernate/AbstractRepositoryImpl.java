@@ -205,7 +205,7 @@ public abstract class AbstractRepositoryImpl<T> implements AbstractRepository<T>
      * @return search result.
      */
 	protected List<T> findByCriteria(final DetachedCriteria criteria) {
-		System.out.println("Create AbstractionRepositoryImpl FindByCreteria");
+		System.out.println("Create AbstractionRepositoryImpl FindByCriteria "+criteria);
         return (List<T>) hibernateTemplate.findByCriteria(criteria);
     }
     

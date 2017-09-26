@@ -8,9 +8,10 @@ import org.hibernate.criterion.Restrictions;
 import org.linagora.linshare.core.domain.entities.OrganizationDetails;
 import org.linagora.linshare.core.exception.BusinessException;
 import org.linagora.linshare.core.facade.webservice.common.dto.OrganizationDetailsDto;
+import org.linagora.linshare.core.repository.OrganizationDetailsRepository;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import OrganizationDetailsAccountRepository.OrganizationDetailsRepository;
+
 
 public class OrganizationDetailsRepositoryImpl extends GenericOrganizationDetailsAccountRepositoryImpl<OrganizationDetails> implements OrganizationDetailsRepository {
 

@@ -70,8 +70,7 @@ import org.linagora.linshare.mongo.entities.logs.WorkGroupNodeAuditLogEntry;
 import org.linagora.linshare.mongo.repository.WorkGroupNodeMongoRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceImpl
-		implements WorkGroupDocumentService {
+public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceImpl implements WorkGroupDocumentService {
 
 	private final DocumentEntryBusinessService documentEntryBusinessService;
 	private final LogEntryService logEntryService;
@@ -86,12 +85,9 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 	public WorkGroupDocumentServiceImpl(DocumentEntryBusinessService documentEntryBusinessService,
 			LogEntryService logEntryService, FunctionalityReadOnlyService functionalityReadOnlyService,
 			MimeTypeService mimeTypeService, VirusScannerService virusScannerService,
-			MimeTypeMagicNumberDao mimeTypeIdentifier,
-			AntiSamyService antiSamyService,
-			WorkGroupNodeMongoRepository workGroupNodeMongoRepository,
-			ThreadMemberRepository threadMemberRepository,
-			MongoTemplate mongoTemplate,
-			OperationHistoryBusinessService operationHistoryBusinessService,
+			MimeTypeMagicNumberDao mimeTypeIdentifier, AntiSamyService antiSamyService,
+			WorkGroupNodeMongoRepository workGroupNodeMongoRepository, ThreadMemberRepository threadMemberRepository,
+			MongoTemplate mongoTemplate, OperationHistoryBusinessService operationHistoryBusinessService,
 			QuotaService quotaService) {
 		super(workGroupNodeMongoRepository, mongoTemplate, antiSamyService, threadMemberRepository, logEntryService);
 		this.documentEntryBusinessService = documentEntryBusinessService;
@@ -106,8 +102,8 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 	}
 
 	@Override
-	public WorkGroupNode create(Account actor, Account owner, Thread workgroup, File tempFile, String fileName, WorkGroupNode nodeParent)
-			throws BusinessException {
+	public WorkGroupNode create(Account actor, Account owner, Thread workgroup, File tempFile, String fileName,
+			WorkGroupNode nodeParent) throws BusinessException {
 		Validate.notNull(nodeParent);
 
 		Long size = tempFile.length();
@@ -136,13 +132,15 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 
 			Functionality enciphermentFunctionality = functionalityReadOnlyService.getEnciphermentFunctionality(domain);
 			Boolean checkIfIsCiphered = enciphermentFunctionality.getActivationPolicy().getStatus();
-			document = documentEntryBusinessService.createWorkGroupDocument(owner, workgroup, tempFile, size, fileName, checkIfIsCiphered, timeStampingUrl, mimeType, nodeParent);
+			document = documentEntryBusinessService.createWorkGroupDocument(owner, workgroup, tempFile, size, fileName,
+					checkIfIsCiphered, timeStampingUrl, mimeType, nodeParent);
 
 			WorkGroupNodeAuditLogEntry log = new WorkGroupNodeAuditLogEntry(actor, owner, LogAction.CREATE,
 					AuditLogEntryType.WORKGROUP_DOCUMENT, document, workgroup);
 			addMembersToLog(workgroup, log);
 			logEntryService.insert(log);
 			addToQuota(workgroup, size);
+
 		} finally {
 			try {
 				logger.debug("deleting temp file : " + tempFile.getName());
@@ -155,12 +153,13 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 	}
 
 	@Override
-	public WorkGroupNode copy(Account actor, Account owner, Thread workGroup, DocumentEntry documentEntry, WorkGroupNode nodeParent)
-			throws BusinessException {
-//		checkCreatePermission(actor, owner, ThreadEntry.class,
-//				BusinessErrorCode.THREAD_ENTRY_FORBIDDEN, null, workGroup);
+	public WorkGroupNode copy(Account actor, Account owner, Thread workGroup, DocumentEntry documentEntry,
+			WorkGroupNode nodeParent) throws BusinessException {
+		// checkCreatePermission(actor, owner, ThreadEntry.class,
+		// BusinessErrorCode.THREAD_ENTRY_FORBIDDEN, null, workGroup);
 		checkSpace(workGroup, documentEntry.getSize());
-		WorkGroupDocument node = documentEntryBusinessService.copy(actor, workGroup, nodeParent, documentEntry.getDocument().getUuid(), documentEntry.getName());
+		WorkGroupDocument node = documentEntryBusinessService.copy(actor, workGroup, nodeParent,
+				documentEntry.getDocument().getUuid(), documentEntry.getName());
 		WorkGroupNodeAuditLogEntry log = new WorkGroupNodeAuditLogEntry(actor, owner, LogAction.CREATE,
 				AuditLogEntryType.WORKGROUP_DOCUMENT, node, workGroup);
 		log.setCause(LogActionCause.COPY);
@@ -173,10 +172,11 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 	@Override
 	public WorkGroupNode copy(Account actor, Account owner, Thread workGroup, WorkGroupDocument nodeSource,
 			WorkGroupNode nodeParent, String newName) throws BusinessException {
-//		checkCreatePermission(actor, owner, ThreadEntry.class,
-//				BusinessErrorCode.THREAD_ENTRY_FORBIDDEN, null, workGroup);
+		// checkCreatePermission(actor, owner, ThreadEntry.class,
+		// BusinessErrorCode.THREAD_ENTRY_FORBIDDEN, null, workGroup);
 		checkSpace(workGroup, nodeSource.getSize());
-		WorkGroupDocument node = documentEntryBusinessService.copy(actor, workGroup, nodeParent, nodeSource.getDocumentUuid(), newName);
+		WorkGroupDocument node = documentEntryBusinessService.copy(actor, workGroup, nodeParent,
+				nodeSource.getDocumentUuid(), newName);
 		WorkGroupNodeAuditLogEntry log = new WorkGroupNodeAuditLogEntry(actor, owner, LogAction.CREATE,
 				AuditLogEntryType.WORKGROUP_DOCUMENT, node, workGroup);
 		log.setCause(LogActionCause.COPY);
@@ -193,7 +193,7 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 				AuditLogEntryType.WORKGROUP_DOCUMENT, workGroupNode, workGroup);
 		addMembersToLog(workGroup, log);
 		logEntryService.insert(log);
-		delFromQuota(workGroup, ((WorkGroupDocument)workGroupNode).getSize());
+		delFromQuota(workGroup, ((WorkGroupDocument) workGroupNode).getSize());
 		repository.delete(workGroupNode);
 		return workGroupNode;
 	}
@@ -209,7 +209,8 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 	}
 
 	@Override
-	public InputStream getThumbnailStream(Account actor, Account owner, Thread workGroup, WorkGroupDocument node) throws BusinessException {
+	public InputStream getThumbnailStream(Account actor, Account owner, Thread workGroup, WorkGroupDocument node)
+			throws BusinessException {
 		return documentEntryBusinessService.getThreadEntryThumbnailStream(node);
 	}
 
@@ -237,7 +238,7 @@ public class WorkGroupDocumentServiceImpl extends WorkGroupNodeAbstractServiceIm
 		} else {
 			String extension = split[split.length - 1];
 			if (mimeTypeIdentifier.isKnownExtension("." + extension)) {
-				String baseName = name.substring(0, name.length() - extension.length() -1);
+				String baseName = name.substring(0, name.length() - extension.length() - 1);
 				UniqueName un = new UniqueName(name);
 				un.setBaseName(baseName);
 				un.setSuffix("." + extension);

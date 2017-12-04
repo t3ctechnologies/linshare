@@ -42,6 +42,7 @@ import java.util.Set;
 import org.apache.commons.lang.Validate;
 import org.linagora.linshare.core.business.service.EntryBusinessService;
 import org.linagora.linshare.core.domain.constants.EntryType;
+import org.linagora.linshare.core.domain.constants.LogActionCause;
 import org.linagora.linshare.core.domain.entities.AbstractDomain;
 import org.linagora.linshare.core.domain.entities.Account;
 import org.linagora.linshare.core.domain.entities.AllowedContact;
@@ -371,7 +372,11 @@ public class ShareServiceImpl extends GenericServiceImpl<Account, ShareEntry> im
 		Calendar expirationDate = Calendar.getInstance();
 		expirationDate.add(shareExpiration.toCalendarValue(),
 				shareExpiration.getValue());
-		Date result = setEndOfDayTime(expirationDate.getTime());
+		expirationDate.add(Calendar.DAY_OF_MONTH, 1);
+		expirationDate.set(Calendar.HOUR_OF_DAY, 0);
+		expirationDate.set(Calendar.MINUTE, 0);
+		expirationDate.set(Calendar.SECOND, 0);
+		Date highLimit = expirationDate.getTime();
 		if (shareExpiration.getDelegationPolicy().getStatus()) {
 			if (userExpiryDate != null) {
 				userExpiryDate = setEndOfDayTime(userExpiryDate);
@@ -380,15 +385,15 @@ public class ShareServiceImpl extends GenericServiceImpl<Account, ShareEntry> im
 							BusinessErrorCode.SHARE_WRONG_EXPIRY_DATE_BEFORE,
 							"Can not share documents, expiry date is before today.");
 				}
-				if (userExpiryDate.after(result)) {
+				if (userExpiryDate.after(highLimit)) {
 					throw new BusinessException(
 							BusinessErrorCode.SHARE_WRONG_EXPIRY_DATE_AFTER,
 							"Can not share documents, expiry date is after the max date.");
 				}
-				result = userExpiryDate;
+				highLimit = userExpiryDate;
 			}
 		}
-		return result;
+		return highLimit;
 	}
 
 	private Date setEndOfDayTime(Date date) {
@@ -410,7 +415,7 @@ public class ShareServiceImpl extends GenericServiceImpl<Account, ShareEntry> im
 
 	@Override
 	public DocumentEntry deleteAllShareEntries(Account actor, Account owner,
-			String docEntryUuid) throws BusinessException {
+			String docEntryUuid, LogActionCause actionCause) throws BusinessException {
 		DocumentEntry entry = documentEntryService.find(actor, owner,
 				docEntryUuid);
 		List<AnonymousShareEntry> list1 = entryBusinessService.findAllMyAnonymousShareEntries((User)owner, entry);
@@ -419,7 +424,7 @@ public class ShareServiceImpl extends GenericServiceImpl<Account, ShareEntry> im
 			anonymousShareEntryService.delete(actor, owner, share.getUuid());
 		}
 		for (ShareEntry share : list2) {
-			shareEntryService.delete(actor, owner, share.getUuid());
+			shareEntryService.delete(actor, owner, share.getUuid(), actionCause);
 		}
 		return documentEntryService.find(actor, owner, entry.getUuid());
 	}
@@ -436,7 +441,7 @@ public class ShareServiceImpl extends GenericServiceImpl<Account, ShareEntry> im
 			throw new BusinessException(BusinessErrorCode.SHARE_NOT_FOUND, msg);
 		}
 		if (entry.getEntryType().equals(EntryType.SHARE)) {
-			shareEntryService.delete(actor, owner, entryUuid);
+			shareEntryService.delete(actor, owner, entryUuid, LogActionCause.UNDEFINED);
 		} else if (entry.getEntryType().equals(EntryType.ANONYMOUS_SHARE)) {
 			anonymousShareEntryService.delete(actor, owner, entryUuid);
 		} else {

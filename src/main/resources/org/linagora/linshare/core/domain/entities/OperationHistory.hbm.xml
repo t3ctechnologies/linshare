@@ -16,7 +16,7 @@
 	<class name="org.linagora.linshare.core.domain.entities.OperationHistory"
 		table="operation_history" lazy="true" discriminator-value="0">
 		<id name="id" column="id" type="long" unsaved-value="0">
-			<generator class="increment"></generator>
+			<generator class="native"></generator>
 		</id>
 		<property name="uuid" column="uuid" type="string" length="255" not-null="true" lazy="false" unique="true" />
 		<property name="creationDate" column="creation_date" type="timestamp" not-null="true" />

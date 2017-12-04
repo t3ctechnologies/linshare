@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.linagora.linshare.core.exception.BusinessException;
-import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.WorkGroupDto;
 import org.linagora.linshare.mongo.entities.logs.AuditLogEntryUser;
 
@@ -61,7 +60,4 @@ public interface WorkGroupFacade extends GenericFacade {
 
 	Set<AuditLogEntryUser> findAll(String workGroupUuid, List<String> actions, List<String> types,
 			String beginDate, String endDate);
-	
-	
-	
 }

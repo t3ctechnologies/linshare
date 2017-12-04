@@ -48,7 +48,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.linagora.linshare.core.exception.BusinessException;
-import org.linagora.linshare.core.facade.webservice.common.dto.RegistrationDto;
 import org.linagora.linshare.core.facade.webservice.common.dto.WorkGroupDto;
 import org.linagora.linshare.core.facade.webservice.user.WorkGroupFacade;
 import org.linagora.linshare.webservice.WebserviceBase;
@@ -63,17 +62,12 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Path("/threads")
 @Api(value = "/rest/user/threads", description = "threads service.", produces = "application/json,application/xml", consumes = "application/json,application/xml")
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-@Produces({ MediaType. APPLICATION_XML, MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 public class ThreadRestServiceImpl extends WebserviceBase implements ThreadRestService {
 
 	private final WorkGroupFacade threadFacade;
 
 	public ThreadRestServiceImpl(final WorkGroupFacade threadFacade) {
-		RuntimeException ex = new RuntimeException();
-		StackTraceElement[] stackTrace = ex.getStackTrace();
-		System.out.println("ThreadRestServiceImpl constructor called.... Stack trace = ");
-		System.out.println(stackTrace[0]);
-		System.out.println(stackTrace[1]);
 		this.threadFacade = threadFacade;
 	}
 
@@ -87,7 +81,6 @@ public class ThreadRestServiceImpl extends WebserviceBase implements ThreadRestS
 	@Override
 	public WorkGroupDto create(@ApiParam(value = "Thread to create.", required = true) WorkGroupDto thread)
 			throws BusinessException {
-		System.out.println("test....my test.....");
 		return threadFacade.create(thread);
 	}
 
@@ -171,8 +164,5 @@ public class ThreadRestServiceImpl extends WebserviceBase implements ThreadRestS
 			@ApiParam(value = "Thread to create.", required = true) WorkGroupDto threadDto) throws BusinessException {
 		return threadFacade.update(threadUuid, threadDto);
 	}
-	
-	
-	
 
 }

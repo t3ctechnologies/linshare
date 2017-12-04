@@ -59,27 +59,9 @@ public class DomainQuotaRepositoryImpl extends GenericQuotaRepositoryImpl<Domain
 
 	@Override
 	public DomainQuota find(AbstractDomain domain) {
-		System.out.println("DomainQuotaRepositoryImpl find1 ... my domain "+domain);
 		DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
 		criteria.add(Restrictions.eq("domain", domain));
-//		criteria.add(Restrictions.eq("uuid", domain.getUuid()));
-		System.out.println("DomainQuotaRepositoryImpl find2  domain.getuuid() "+domain.getUuid());
 		DomainQuota quota = DataAccessUtils.singleResult(findByCriteria(criteria));
-		System.out.println("DomainQuotaRepositoryImpl find2 quota:"+quota);
-		if (quota != null) {
-			this.getHibernateTemplate().refresh(quota);
-		}
-		return quota;
-	}
-	
-	public DomainQuota find1(AbstractDomain domain) {
-		System.out.println("DomainQuotaRepositoryImpl find1 ... my domain "+domain);
-		DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
-//		criteria.add(Restrictions.eq("domain", domain));
-		criteria.add(Restrictions.eq("uuid", domain.getUuid()));
-		System.out.println("DomainQuotaRepositoryImpl find2  domain.getuuid() "+domain.getUuid());
-		DomainQuota quota = DataAccessUtils.singleResult(findByCriteria(criteria));
-		System.out.println("DomainQuotaRepositoryImpl find2 quota:"+quota);
 		if (quota != null) {
 			this.getHibernateTemplate().refresh(quota);
 		}
@@ -184,5 +166,12 @@ public class DomainQuotaRepositoryImpl extends GenericQuotaRepositoryImpl<Domain
 		Long updatedCounter = getHibernateTemplate().execute(action);
 		logger.debug(" {} quota of DomainQuota have been updated.", updatedCounter);
 		return updatedCounter;
+	}
+
+	@Override
+	public List<DomainQuota> findAllByParent(AbstractDomain parentDomain) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
+		criteria.add(Restrictions.eq("parentDomain", parentDomain));
+		return findByCriteria(criteria);
 	}
 }

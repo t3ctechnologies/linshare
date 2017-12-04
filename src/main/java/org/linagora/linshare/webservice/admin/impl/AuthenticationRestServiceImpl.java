@@ -82,7 +82,6 @@ public class AuthenticationRestServiceImpl extends WebserviceBase implements Aut
 	@ApiOperation(value = "Check if user is authorized.", response = UserDto.class)
 	@Override
 	public UserDto isAuthorized() throws BusinessException {
-		System.out.println("isAuthorized called");
 		return adminFacade.isAuthorized(Role.ADMIN);
 	}
 

@@ -3,6 +3,7 @@ set -e
 
 g_import_src=../src/main/resources/sql/postgresql/import-postgresql.sql
 g_import_new=../src/main/resources/sql/postgresql/import-postgresql.sql.new
+g_reset_default_emails=../src/main/resources/sql/postgresql/reset-default-emails-config.sql
 g_host=127.0.0.1
 g_port=5432
 g_database=linshare
@@ -41,7 +42,7 @@ UPDATE mail_footer_lang SET readonly = true;
 " >> ${g_output_clean}
 #UPDATE mail_activation SET enable = false;
 
-    sed -i -r -e "s/'2017-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3,6}'/now()/g" ${g_output_clean}
+    sed -i -r -e "s/'2017-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{2,6}'/now()/g" ${g_output_clean}
 
     echo generated files : ${g_output} ${g_output_clean}
 }
@@ -71,6 +72,26 @@ DELETE FROM mail_layout ;
 
 }
 
+function update_reset_script ()
+{
+    echo update reset default emails sql file :
+    echo "
+    BEGIN;
+UPDATE domain_abstract SET mailconfig_id = null where mailconfig_id = 1;
+DELETE FROM mail_content_lang WHERE id < 1000;
+DELETE FROM mail_footer_lang WHERE id < 1000;
+DELETE FROM mail_config WHERE id = 1;
+DELETE FROM mail_content WHERE id < 1000;
+DELETE FROM mail_footer WHERE id < 1000;
+DELETE FROM mail_layout WHERE id < 1000;
+" > ${g_reset_default_emails}
+    cat ${g_output_clean} >> ${g_reset_default_emails}
+    sed -i -e '/UPDATE domain_abstract SET mailconfig_id = 1;/ d' ${g_reset_default_emails}
+    echo "UPDATE domain_abstract SET mailconfig_id = 1 where mailconfig_id is null;
+COMMIT;" >> ${g_reset_default_emails}
+    echo "reset default emails file updated : ${g_reset_default_emails}"
+}
+
 function update_postgresql ()
 {
     sed -r -e '/-- ###BEGIN-PART-1###/,/###END-PART-1###/ !d' ${g_import_src} > ${g_import_new}
@@ -81,6 +102,17 @@ function update_postgresql ()
     echo update postgresql sql file :
     mv -v ${g_import_new} ${g_import_src}
 
+}
+
+function update_migration_1_12 ()
+{
+    l_upgrade_1_12_src=../src/main/resources/sql/postgresql/Migration_1.12.0_to_2.0.0.sql
+    l_upgrade_1_12_dest=../src/main/resources/sql/postgresql/Migration_1.12.0_to_2.0.0.sql.new
+    sed -r -e '1,/-- ###BEGIN-PART-2###/ !d' ${l_upgrade_1_12_src} > ${l_upgrade_1_12_dest}
+    cat ${g_output_clean} >> ${l_upgrade_1_12_dest}
+    sed -r -e '/###END-PART-2###/,$ !d' ${l_upgrade_1_12_src} >> ${l_upgrade_1_12_dest}
+    echo update update_migration_1_12 sql file :
+    mv -v ${l_upgrade_1_12_dest} ${l_upgrade_1_12_src}
 }
 
 
@@ -105,6 +137,8 @@ if [ -z "${g_step}" ] ; then
     dump_and_clean
     update_postgresql
     update_embedded
+    update_reset_script
+    update_migration_1_12
 else
     for func in ${g_step}
     do

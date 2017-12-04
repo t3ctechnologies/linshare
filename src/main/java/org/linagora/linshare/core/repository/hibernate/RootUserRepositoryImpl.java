@@ -47,7 +47,6 @@ public class RootUserRepositoryImpl  extends GenericUserRepositoryImpl<Root> imp
 
 	@Override
 	public Root findByLogin(String login) {
-		System.out.println("RootUserRepositoryImpl");
 		return super.findByMailAndDomain(LinShareConstants.rootDomainIdentifier, login);
 	}
 

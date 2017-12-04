@@ -45,7 +45,7 @@ import org.linagora.linshare.core.domain.constants.Language;
 import org.linagora.linshare.core.domain.constants.Role;
 import org.linagora.linshare.core.domain.constants.SupportedLanguage;
 
-public  abstract class Account {
+public abstract class Account {
 
 	protected long id;
 
@@ -88,13 +88,8 @@ public  abstract class Account {
 	protected Set<UploadRequestTemplate> uploadRequestTemplates;
 
 	protected Set<UploadRequest> uploadRequests;
-	
-//	public Account() {
-//		super();
-//	}
 
 	public Account() {
-		super();
 		setCreationDate(new Date());
 		setModificationDate(new Date());
 	}
@@ -261,8 +256,7 @@ public  abstract class Account {
 	public abstract String getFullName();
 
 	public abstract ContainerQuotaType getContainerQuotaType();
-	
-	
+
 	public Language getExternalMailLocale() {
 		return externalMailLocale;
 	}

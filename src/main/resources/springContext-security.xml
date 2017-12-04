@@ -315,7 +315,4 @@
 	<b:bean class="org.linagora.linshare.auth.sso.SSOInfoLogger"
 		init-method="afterPropertiesSet">
 	</b:bean>
-
-
-	
 </b:beans>

@@ -37,15 +37,10 @@
 	</bean>
 
 	<bean id="userThreadMemberRestService" class="org.linagora.linshare.webservice.userv1.impl.ThreadMemberRestServiceImpl">
-		<!-- <constructor-arg ref="wsThreadFacade" /> -->
+<!-- 		<constructor-arg ref="wsThreadFacade" /> -->
 		<constructor-arg ref="wsThreadMemberFacade" />
 	</bean>
-	
-	<!-- <bean id="userRegistrationService" class="org.linagora.linshare.webservice.userv1.impl.RegistrationServiceImpl"> -->
-		<!-- <constructor-arg ref="wsThreadFacade" /> -->
-		<!-- <constructor-arg ref="wsThreadMemberFacade" /> -->
-	<!-- </bean> -->
-	
+
 	<bean id="userThreadRestService" class="org.linagora.linshare.webservice.userv1.impl.ThreadRestServiceImpl">
 		<constructor-arg ref="wsThreadFacade" />
 	</bean>

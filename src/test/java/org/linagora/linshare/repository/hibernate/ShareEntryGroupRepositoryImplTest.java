@@ -103,7 +103,7 @@ public class ShareEntryGroupRepositoryImplTest extends
 	@Test
 	public void testFindAllShareEntriesAboutToBeNotified()
 			throws BusinessException {
-		/*logger.debug("Begin testFindAllShareEntriesAboutToBeNotified");
+		logger.debug("Begin testFindAllShareEntriesAboutToBeNotified");
 
 		List<String> list = null;
 		try {
@@ -116,13 +116,13 @@ public class ShareEntryGroupRepositoryImplTest extends
 		Assert.assertEquals(2, list.size());
 		Assert.assertTrue(list.contains(IMPORT_LOCAL_TEST_SEG_UUID_1));
 		Assert.assertTrue(list.contains(IMPORT_LOCAL_TEST_SEG_UUID_2));
-		logger.debug("End testFindAllShareEntriesAboutToBeNotified");*/
+		logger.debug("End testFindAllShareEntriesAboutToBeNotified");
 	}
 
 	@Test
 	public void testFindAllAnonymousShareEntriesAboutToBeNotified()
 			throws BusinessException {
-		/*logger.debug("Begin testFindAllAnonymousShareEntriesAboutToBeNotified");
+		logger.debug("Begin testFindAllAnonymousShareEntriesAboutToBeNotified");
 		List<String> list = null;
 		try {
 			list = repository
@@ -135,7 +135,7 @@ public class ShareEntryGroupRepositoryImplTest extends
 		Assert.assertEquals(2, list.size());
 		Assert.assertTrue(list.contains(IMPORT_LOCAL_TEST_SEG_UUID_1));
 		Assert.assertTrue(list.contains(IMPORT_LOCAL_TEST_SEG_UUID_5));
-		logger.debug("End testFindAllAnonymousShareEntriesAboutToBeNotified");*/
+		logger.debug("End testFindAllAnonymousShareEntriesAboutToBeNotified");
 	}
 
 	@Test
@@ -187,7 +187,7 @@ public class ShareEntryGroupRepositoryImplTest extends
 	@Test
 	public void testNeedNotification() throws BusinessException,
 			JobExecutionException {
-		/*Set<String> allUuids = repository.findAllAboutToBeNotified();
+		Set<String> allUuids = repository.findAllAboutToBeNotified();
 		Assert.assertEquals(3, allUuids.size());
 
 		ShareEntryGroup shareEntryGroup = null;
@@ -202,6 +202,6 @@ public class ShareEntryGroupRepositoryImplTest extends
 
 		shareEntryGroup = repository
 				.findByUuid(IMPORT_LOCAL_TEST_SEG_UUID_2);
-		Assert.assertTrue(shareEntryGroup.needNotification()); */
+		Assert.assertTrue(shareEntryGroup.needNotification());
 	}
 }

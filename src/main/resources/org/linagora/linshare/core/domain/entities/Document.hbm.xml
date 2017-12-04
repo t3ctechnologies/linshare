@@ -7,7 +7,7 @@
 	<class name="org.linagora.linshare.core.domain.entities.Document" table="document" lazy="true">
 		<id name="id" type="long" unsaved-value="0">
 			<column name="id" not-null="true" index="index_document_id" />
-			<generator class="increment" />
+			<generator class="native" />
 		</id>
 		<property name="uuid" column="uuid" index="document3" type="string" length="255" not-null="true" lazy="false" />
 		<property name="bucketUuid" column="bucket_uuid" type="string" length="255" lazy="false" />

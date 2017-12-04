@@ -10,12 +10,6 @@
 	<bean name="threadRepository" class="org.linagora.linshare.core.repository.hibernate.ThreadRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
-	
-	<bean name="registrationRepository" class="org.linagora.linshare.core.repository.hibernate.RegistrationRepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
-	
-	
 
 	<bean name="threadMemberRepository" class="org.linagora.linshare.core.repository.hibernate.ThreadMemberRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
@@ -293,29 +287,5 @@
 	<bean name="upgradeTaskRepository" class="org.linagora.linshare.core.repository.hibernate.UpgradeTaskRepositoryImpl">
 		<constructor-arg ref="hibernateTemplate" />
 	</bean>
-	
-	<bean name="modulesRepository" class="org.linagora.linshare.core.repository.hibernate.ModulesRepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
-	
-	<bean name="organizationRepository" class="org.linagora.linshare.core.repository.hibernate.OrganizationRepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
 
-   	<bean name="organizationaccessRepository" class="org.linagora.linshare.core.repository.hibernate.OrganizationAccessRepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
-	
-	 	<bean name="organizationdetailsRepository" class="org.linagora.linshare.core.repository.hibernate.OrganizationDetailsRepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
-	
-	<bean name="user1Repository" class="org.linagora.linshare.core.repository.hibernate.User1RepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
-	
-	<bean name="account1Repository" class="org.linagora.linshare.core.repository.hibernate.Account1RepositoryImpl">
-		<constructor-arg ref="hibernateTemplate" />
-	</bean>
-	
 </beans>

@@ -106,7 +106,6 @@ public class ContainerQuota extends Quota {
 			long quotaWarning, long fileSizeMax, long currentValue, long lastValue, ContainerQuotaType containerType) {
 		super(domain, parentDomain, quota, quotaWarning);
 
-		System.out.println("ContainerQuota Constructor");
 		// Link to the parent
 		this.domainQuota = domainQuota;
 
@@ -124,8 +123,6 @@ public class ContainerQuota extends Quota {
 		this.currentValue = currentValue;
 		this.lastValue = lastValue;
 		this.shared = false;
-		System.out.println("containerQuata "+this.containerQuotaType);
-		System.out.println("conatinerQuata  "+containerQuotaType.WORK_GROUP);
 		if (this.containerQuotaType.equals(ContainerQuotaType.WORK_GROUP)) {
 			this.shared = true;
 		}

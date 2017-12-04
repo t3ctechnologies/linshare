@@ -13,7 +13,7 @@
 	</typedef>
 	<class name="AsyncTask" table="async_task">
 		<id name="id" column="id" type="long" unsaved-value="0">
-			<generator class="increment">
+			<generator class="native">
 			</generator>
 		</id>
 		<many-to-one name="actor" column="actor_id" class="org.linagora.linshare.core.domain.entities.Account" not-null="true">

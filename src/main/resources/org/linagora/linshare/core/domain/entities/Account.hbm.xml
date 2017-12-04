@@ -27,7 +27,7 @@
 
 	<class name="org.linagora.linshare.core.domain.entities.Account" table="account" lazy="false" discriminator-value="0">
 		<id name="id" column="id" type="long" unsaved-value="0">
-			<generator class="increment">
+			<generator class="native">
 			</generator>
 		</id>
 		<discriminator column="account_type" type="integer"/>

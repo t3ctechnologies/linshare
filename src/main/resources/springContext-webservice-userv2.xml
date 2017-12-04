@@ -29,6 +29,10 @@
 		<constructor-arg value="${linshare.rest.files.size.validation}" />
 	</bean>
 
+	<bean id="userv2ReceivedShareRestService" class="org.linagora.linshare.webservice.userv2.impl.ReceivedShareRestServiceImpl">
+		<constructor-arg ref="wsShareFacade" />
+	</bean>
+
 	<bean id="userv2WorkGroupMemberRestService" class="org.linagora.linshare.webservice.userv2.impl.WorkGroupMemberRestServiceImpl">
 		<constructor-arg ref="wsThreadMemberFacade" />
 	</bean>
@@ -84,43 +88,9 @@
 	<bean id="userv2WelcomeMessagesRestService" class="org.linagora.linshare.webservice.userv2.impl.WelcomeMessagesRestServiceImpl">
 		<constructor-arg ref="wsWelcomeMessagesFacadeImpl" />
 	</bean>
-	
-	<bean id="registrationRestService" class="org.linagora.linshare.webservice.registration.impl.RegistrationRestServiceImpl">
-		<constructor-arg ref="registrationRepository" />
-		<!-- <constructor-arg ref="notifierService"/> -->
-	</bean>
-	
-	<bean id="modulesRestService" class="org.linagora.linshare.webservice.registration.impl.ModuleRestServiceImpl">
-		<constructor-arg ref="modulesRepository" />
-	</bean>
-	                          
-	<bean id="organizationRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationRestServiceImpl">
-		<constructor-arg ref="organizationRepository" />
-	</bean>
-	
-	<bean id="organizationaccessRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationAccessRestServiceImpl">
-		<constructor-arg ref="organizationaccessRepository" />
-	</bean>
-	
-	<bean id="organizationdetailsRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationDetailsRestServiceImpl">
-		<constructor-arg ref="organizationdetailsRepository" />
-	</bean>
-	
-	
-	
-	<bean id="organizationRegisterRestService" class="org.linagora.linshare.webservice.registration.impl.OrganizationRegisterRestServiceImpl">
-		<constructor-arg ref="wsOrganizationRegisterFacade" />
-	</bean>
-	
 
 	<jaxrs:server id="userRestContainer" address="/rest/user/v2">
 		<jaxrs:serviceBeans>
-		<ref bean="organizationRegisterRestService" />
-		<ref bean="registrationRestService" />
-		<ref bean="modulesRestService" />
-		<ref bean="organizationRestService" />
-		<ref bean="organizationaccessRestService" />
-		<ref bean="organizationdetailsRestService" />
 			<ref bean="userEnumRestService" />
 			<ref bean="userAuthenticationRestService" />
 			<ref bean="userv2DocumentRestService" />
@@ -130,7 +100,7 @@
 			<ref bean="userv2GuestRestService" />
 			<ref bean="userShareRestService" />
 			<ref bean="userRestService" />
-			<ref bean="userReceivedShareRestService" />
+			<ref bean="userv2ReceivedShareRestService" />
 			<ref bean="userLogRestService" />
 			<ref bean="userFunctionalityRestService" />
 			<ref bean="userv2FlowDocumentUploaderRestService" />
@@ -147,7 +117,6 @@
 <!-- 			<ref bean="userv2StatisticRestService" /> -->
 			<ref bean="userv2AccountQuotaRestService" />
 			<ref bean="userv2WelcomeMessagesRestService" />
-			<!-- <ref bean="registrationRestService" /> -->
 <!--
 			<ref bean="pluginCompatibilityRestServiceV2" />
 -->

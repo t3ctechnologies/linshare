@@ -156,7 +156,6 @@ public class ThreadServiceImpl extends GenericServiceImpl<Account, Thread> imple
 				|| !threadCreation.getActivationPolicy().getStatus()) {
 			throw new BusinessException(BusinessErrorCode.THREAD_FORBIDDEN, "Functionality forbideen.");
 		}
-		
 		checkCreatePermission(actor, owner, Thread.class,
 				BusinessErrorCode.THREAD_FORBIDDEN, null);
 		Thread thread = null;
@@ -176,7 +175,6 @@ public class ThreadServiceImpl extends GenericServiceImpl<Account, Thread> imple
 		ThreadMemberAuditLogEntry log2 = new ThreadMemberAuditLogEntry(actor, owner, LogAction.CREATE,
 				AuditLogEntryType.WORKGROUP_MEMBER, member);
 		logEntryService.insert(log2);
-		
 		return thread;
 	}
 

@@ -233,7 +233,6 @@ public class DocumentRestServiceImpl extends WebserviceBase implements DocumentR
 			@ApiResponse(code = 500, message = "Internal server error."), })
 	@Override
 	public List<DocumentDto> findAll() throws BusinessException {
-		System.out.println("Get Documents");
 		return documentFacade.findAll();
 	}
 

@@ -51,6 +51,7 @@ public class DomainAuthenticationProcessingFilter extends
 	protected void setDetails(HttpServletRequest request,
 			UsernamePasswordAuthenticationToken authRequest) {
 		String domainIdentifier = request.getParameter("domain");
+
 		if (domainRequestHeader != null && domainIdentifier == null)
 			domainIdentifier = request.getHeader(domainRequestHeader);
 

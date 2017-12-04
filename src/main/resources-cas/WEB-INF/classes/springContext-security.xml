@@ -274,7 +274,4 @@
        <bean id="casSingleSignOutFilter"
        	class="org.jasig.cas.client.session.SingleSignOutFilter" />
 
-
-
-   
-    </beans>
+</beans>

@@ -41,6 +41,7 @@ import org.linagora.linshare.core.exception.BusinessException;
 import org.linagora.linshare.core.facade.webservice.common.dto.ShareDto;
 import org.linagora.linshare.core.facade.webservice.delegation.dto.ShareCreationDto;
 import org.linagora.linshare.core.facade.webservice.user.dto.DocumentDto;
+import org.linagora.linshare.mongo.entities.logs.AuditLogEntryUser;
 
 
 public interface ShareFacade extends GenericFacade {
@@ -70,4 +71,7 @@ public interface ShareFacade extends GenericFacade {
 	ShareDto delete(String shareUuid, Boolean received) throws BusinessException;
 
 	DocumentDto copy(String shareEntryUuid) throws BusinessException;
+
+	Set<AuditLogEntryUser> findAll(String ownerUuid, String uuid, List<String> actions, List<String> types,
+			String beginDate, String endDate);
 }

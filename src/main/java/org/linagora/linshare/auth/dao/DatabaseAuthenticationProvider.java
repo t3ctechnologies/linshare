@@ -85,15 +85,12 @@ public class DatabaseAuthenticationProvider extends
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
 		UserDetails loadedUser;
-		System.out.println("DatabaseAuthenticationProvider retrieve User");
-		if (username == null || username.length() == 0) {
-			System.out.println("DatabaseAuthenticationProvider retrieve User username is null");
+
+		if (username == null || username.length() == 0)
 			throw new UsernameNotFoundException("username must not be null");
-		}
 		logger.debug("Trying to load '" + username + "' account detail ...");
-		System.out.println("DatabaseAuthenticationProvider retrieve User trying to load "+username);
+
 		if (authentication.getCredentials() == null) {
-			System.out.println("DatabaseAuthenticationProvider retrieve User authentication is  null");
 			logger.debug("Authentication failed: no credentials provided");
 			throw new BadCredentialsException(messages.getMessage(
 					"AbstractUserDetailsAuthenticationProvider.badCredentials",
@@ -101,7 +98,6 @@ public class DatabaseAuthenticationProvider extends
 		}
 
 		try {
-			System.out.println("DatabaseAuthenticationProvider retrieve User under try catch block");
 			String password = null;
 			User account = null;
 			String domainIdentifier = null;
@@ -111,11 +107,10 @@ public class DatabaseAuthenticationProvider extends
 					&& authentication.getDetails() instanceof String) {
 				domainIdentifier = (String) authentication.getDetails();
 			}
-			System.out.println("DatabaseAuthenticationProvider retrieve User debug1, domainIdentifier: "+domainIdentifier);
+
 			account = userDetailsProvider.retrieveUser(domainIdentifier, username);
 
 			if (account != null) {
-				System.out.println("DatabaseAuthenticationProvider retrieve User is not null");
 				logger.debug("Account in database found : " + account.getAccountRepresentation());
 				password = account.getPassword();
 				if (password != null && password.equals(""))	password = null;
@@ -130,7 +125,6 @@ public class DatabaseAuthenticationProvider extends
 			if (account == null
 					|| password == null
 					|| account.hasSystemAccountRole()) {
-				System.out.println("DatabaseAuthenticationProvider retrieve User account not found");
 				logger.debug("Account not found");
 				throw new UsernameNotFoundException("Account not found");
 			}

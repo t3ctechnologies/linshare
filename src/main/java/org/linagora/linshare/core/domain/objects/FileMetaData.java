@@ -78,10 +78,7 @@ public class FileMetaData {
 
 	public FileMetaData(FileMetaDataKind kind, Document document) {
 		super();
-		System.out.println("Class : FileMetaDate "+document.getUuid());
 		this.uuid = document.getUuid();
-		
-		
 		if (kind.equals(FileMetaDataKind.THUMBNAIL)) {
 			this.uuid = document.getThmbUuid();
 		}

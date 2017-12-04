@@ -134,7 +134,6 @@ public class WorkGroupNodeRestServiceImpl extends WebserviceBase implements
 			@ApiParam(value = "Dry run mode . (default=false).", required = false)
 				@QueryParam("dryRun") @DefaultValue("false") Boolean dryRun)
 				throws BusinessException {
-		System.out.println("Abdul Work group");
 		return workGroupNodeFacade.create(null, workGroupUuid, workGroupFolder, strict, dryRun);
 	}
 
@@ -153,7 +152,6 @@ public class WorkGroupNodeRestServiceImpl extends WebserviceBase implements
 			@ApiParam(value = "Filter by node type.", required = false) @QueryParam("type") WorkGroupNodeType nodeType
 			)
 				throws BusinessException {
-		System.out.println("Abdul Work group");
 		return workGroupNodeFacade.findAll(null, workGroupUuid, parent, false, nodeType);
 	}
 
@@ -275,9 +273,8 @@ public class WorkGroupNodeRestServiceImpl extends WebserviceBase implements
 				return new WorkGroupAsyncTask(asyncTask, threadEntryTaskContext);
 			} catch (Exception e) {
 				logAsyncFailure(asyncTask, e);
-				throw e;
-			} finally {
 				deleteTempFile(tempFile);
+				throw e;
 			}
 		} else {
 			// TODO : manage transfertDuration

@@ -35,11 +35,13 @@
 package org.linagora.linshare.core.dao.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-
+import org.apache.derby.tools.sysinfo;
 import org.linagora.linshare.core.dao.FileDataStore;
 import org.linagora.linshare.core.domain.constants.FileMetaDataKind;
 import org.linagora.linshare.core.domain.objects.FileMetaData;
+import org.waarp.ftp.client.testcode.FtpClient;
 
 public class DataKindBalancerFileDataStoreImpl implements FileDataStore {
 
@@ -52,7 +54,7 @@ public class DataKindBalancerFileDataStoreImpl implements FileDataStore {
 		this.bigFilesDataStore = bigFilesDataStore;
 		this.smallFilesDataStore = smallFilesDataStore;
 	}
-	
+
 	@Override
 	public void remove(FileMetaData metadata) {
 		if (metadata.getKind().equals(FileMetaDataKind.DATA)) {
@@ -64,6 +66,7 @@ public class DataKindBalancerFileDataStoreImpl implements FileDataStore {
 
 	@Override
 	public FileMetaData add(File file, FileMetaData metadata) {
+
 		if (metadata.getKind().equals(FileMetaDataKind.DATA)) {
 			return bigFilesDataStore.add(file, metadata);
 		} else {
@@ -82,6 +85,20 @@ public class DataKindBalancerFileDataStoreImpl implements FileDataStore {
 
 	@Override
 	public InputStream get(FileMetaData metadata) {
+
+		String fileName = new SftpLinshareWaarp().getByUuid(metadata.getUuid());
+
+		if (fileName != null) {
+			File tempFile = new File(fileName);
+			fileName = "E:\\Linshare_Files\\"+tempFile.getName();
+		}
+		try {
+			FtpClient.init(fileName, 9);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (metadata.getKind().equals(FileMetaDataKind.DATA)) {
 			return bigFilesDataStore.get(metadata);
 		} else {
@@ -97,5 +114,19 @@ public class DataKindBalancerFileDataStoreImpl implements FileDataStore {
 			return smallFilesDataStore.exists(metadata);
 		}
 	}
+
+	/*
+	 * public void insertsftp(FileMetaData metadata) throws SQLException {
+	 * 
+	 * 
+	 * FileDataStore fileDataStore; // String id1= fileDataStore.get(metadata);
+	 * FileMetaData metadata1 = new FileMetaData(fileName, uuid); String id =
+	 * metadata1.getUuid(); System.out.println("hiiiii  "); String file =
+	 * metadata1.getFileName(); // String id= FilemetaData.getuuid();
+	 * SftpLinshareWaarp sftp = new SftpLinshareWaarp();
+	 * 
+	 * 
+	 * }
+	 */
 
 }

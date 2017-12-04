@@ -6,7 +6,7 @@
 
 		<id name="persistenceId" type="long">
 			<column name="id" not-null="true" />
-			<generator class="increment" />
+			<generator class="native" />
 		</id>
 		<property name="uuid" column="uuid" type="string" length="255" not-null="true" lazy="false" unique="true" />
 		<property name="mail" column="mail" type="string" length="255" not-null="true" lazy="false" />

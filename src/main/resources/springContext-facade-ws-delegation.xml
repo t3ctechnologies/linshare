@@ -69,19 +69,4 @@
 		<constructor-arg ref="shareEntryGroupService" />
 	</bean>
 
-	<bean id="wsOrganizationRegisterFacade" class="org.linagora.linshare.core.facade.webservice.delegation.impl.OrganizationRegisterFacadeImpl">
-		<constructor-arg ref="registrationRepository" />
-		<constructor-arg ref="organizationRepository" />
-		<constructor-arg ref="modulesRepository" />
-		<constructor-arg ref="organizationaccessRepository" />
-		<constructor-arg ref="user1Repository" />
-		<constructor-arg ref="accountRepository"/>
-		<constructor-arg ref="account1Repository"/>
-		<constructor-arg ref="abstractDomainRepository"/>
-		<constructor-arg ref="accountQuotaRepository"/>
-		<constructor-arg ref="domainQuotaRepository" />
-		<constructor-arg ref="containerQuotaRepository" />
-		<!-- <constructor-arg ref ="domainBusinessService"/> -->
-	</bean>
-
 </beans>

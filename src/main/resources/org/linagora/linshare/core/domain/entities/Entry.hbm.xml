@@ -3,7 +3,7 @@
 <hibernate-mapping>
 	<class name="org.linagora.linshare.core.domain.entities.Entry" table="entry" lazy="true">
 		<id name="id" column="id" type="long" unsaved-value="0">
-			<generator class="increment">
+			<generator class="native">
 			</generator>
 		</id>
 		<many-to-one name="entryOwner" column="owner_id" class="org.linagora.linshare.core.domain.entities.Account" not-null="true" lazy="proxy">

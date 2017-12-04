@@ -145,6 +145,7 @@ public class JcloudObjectStorageFileDataStoreImpl implements FileDataStore {
 	public FileMetaData add(File file, FileMetaData metadata) {
 		try (FileInputStream fis = new FileInputStream(file)) {
 			return metadata = add(fis, metadata);
+			
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 			throw new TechnicalException(TechnicalErrorCode.GENERIC, "Can not add a new file : " + e.getMessage());
@@ -177,6 +178,18 @@ public class JcloudObjectStorageFileDataStoreImpl implements FileDataStore {
 		String eTag = blobStore.putBlob(bucketIdentifier, blob);
 		logger.debug("etag : {}", eTag);
 		stats(start, "putBlob");
+		// TODO 
+		
+		File file1=new File(metadata.getUuid());
+		String str = file1.getPath();
+		String str5 = file1.getAbsolutePath();
+		File file2=new File(str5);
+		if(file2.exists())
+		{
+			System.out.println(str);
+			
+			File f = new File(str);
+		}
 		return metadata;
 	}
 

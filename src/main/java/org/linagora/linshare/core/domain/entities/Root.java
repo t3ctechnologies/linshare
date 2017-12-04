@@ -33,8 +33,6 @@
  */
 package org.linagora.linshare.core.domain.entities;
 
-import java.util.UUID;
-
 import org.linagora.linshare.core.domain.constants.AccountType;
 
 public class Root extends User {
@@ -48,18 +46,5 @@ public class Root extends User {
 	public String getAccountRepresentation() {
 		return this.firstName + " " + this.lastName + "(" + lsUuid + ")";
 	}
-	
-	
-	
-	//MY code.... to set previlages to login
-//	
-//	public Root(String firstName, String lastName, String mail,
-//			String ldapUid) {
-//		super(firstName, lastName, mail);
-//		this.ldapUid = ldapUid;
-//		this.lsUuid = UUID.randomUUID().toString();
-//		this.inconsistent = false;
-//	}
-
 
 }

@@ -81,7 +81,6 @@ abstract class GenericUserRepositoryImpl<U extends User> extends GenericAccountR
 
 	@Override
 	public U findByMailAndDomain(String domainId, String mail) {
-		System.out.println("GenericUserRepositoryImpl findByMailAndDomain domainId "+domainId+", mail: "+mail+", persistentClass "+getPersistentClass());
 		DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
 		criteria.createAlias("domain", "domain");
 		criteria.add(Restrictions.eq("domain.uuid",domainId));

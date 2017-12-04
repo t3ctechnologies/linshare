@@ -5,7 +5,7 @@
 	<class name="MailingList" table="mailing_list">
 		<id name="persistenceId" type="long">
 			<column name="id" not-null="true" />
-			<generator class="increment" />
+			<generator class="native" />
 		</id>
 
 		<property access="field" name="isPublic" column="is_public" type="boolean" not-null="true" />
